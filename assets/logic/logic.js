@@ -4,12 +4,54 @@
 
 // variable declarations
 //===========================================================================
-
+var userName = "";
+var password = "";
+var language = "";
 
 // function declarations
 //===========================================================================
 
 // firebase stuff
+var config = {
+    apiKey: "AIzaSyCGtI9XNr0J-kA2A7VgdavXQXtoNiN6vcI",
+    authDomain: "project1-8d0be.firebaseapp.com",
+    databaseURL: "https://project1-8d0be.firebaseio.com",
+    projectId: "project1-8d0be",
+    storageBucket: "project1-8d0be.appspot.com",
+    messagingSenderId: "799117703087"
+  };
+  firebase.initializeApp(config);
+  
+  var database = firebase.database();
+
+  database.ref().on("value", function(snapshot) {
+    if (snapshot.child("userName").exists() && snapshot.child("language").exists()) {
+    // Set the variables for userName and language equal to the stored values if they exist
+        userName = snapshot.val().userName;
+        language = snapshot.val().language;
+      }
+
+    else {
+        
+    }
+
+
+    console.log(userName);
+    console.log(language);
+
+    // post new user info to firebase
+    database.ref().set({
+        userName: userName,
+        password: password,
+        userInfo: userInfo,
+        language: setLanguage
+    });
+    
+
+
+}, function(errorObject) {
+    console.log("The read failed: " + errorObject.code);
+  });
 
 // api calls
 
