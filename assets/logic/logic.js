@@ -1,6 +1,6 @@
 // anything we want to have happen before the page starts
 //===========================================================================
-
+$("#modal").modal(hide);
 
 // variable declarations
 //===========================================================================
@@ -32,7 +32,21 @@ var config = {
       }
 
     else {
-        
+        //modal to display with profile creation questions
+        $("#modal").modal(show);
+
+        //grab info from modal input boxes
+        userName = $("#modal-userName").val().trim;
+        password = $("#modal-password").val().trim;
+        language = $("#modal-language").val().trim;
+
+        //set info to database
+        database.ref().set({
+            userName: userName,
+            password: password,
+            language: setLanguage
+        });
+
     }
 
 
@@ -40,12 +54,7 @@ var config = {
     console.log(language);
 
     // post new user info to firebase
-    database.ref().set({
-        userName: userName,
-        password: password,
-        userInfo: userInfo,
-        language: setLanguage
-    });
+    
     
 
 
@@ -90,3 +99,14 @@ $.ajax({
 // giphy stuff from last project in a scroll menu to choose from
 
 // gif post into the chatroom
+
+//language dropdown option
+var langOptions = langArray;
+        var mySelect = $('#langSelect');
+        $.each(langOptions, function(val, text) {
+            mySelect.append(
+                $('<option></option>').val(val).html(text)
+            );
+        });
+        console.log(langOptions);
+        
