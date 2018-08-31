@@ -19,7 +19,17 @@
 
 // giphy api button stuff
 
+
 // translator api stuff
+var selectedLanguage = "";  // should be something like en, jp, etc. for reference look at google translate api
+var translatedLanguage = "";    // same stuff from above
+var translatedText = "";    // any text you want to translate from sl to tl . . .
+var translateURL = "https://translate.googleapis.com/translate_a/single?client=gtx&sl=" + selectedLanguage + "&tl=" + translatedLanguage + "&dt=t&q=" + translatedText;
+
+$.ajax({
+    url: queryURL,
+    method: "GET"
+}).then(function (response) {
 
 
 // function functionality
@@ -38,5 +48,3 @@
 // giphy stuff from last project in a scroll menu to choose from
 
 // gif post into the chatroom
-
-
