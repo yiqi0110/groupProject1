@@ -33,6 +33,7 @@ var config = {
 
     else {
         //modal to display with profile creation questions
+        // if no firebase data, prompt profile creation
         $("#modal").modal(show);
 
         //grab info from modal input boxes
@@ -41,35 +42,47 @@ var config = {
         language = $("#modal-language").val().trim;
 
         //set info to database
+        // post new user info to firebase
         database.ref().set({
             userName: userName,
             password: password,
             language: setLanguage
         });
-
+        
+        //push new user to database
+        database.ref().push(newUser);
     }
-
-
-    console.log(userName);
-    console.log(language);
-
-    // post new user info to firebase
     
-    
-
-
 }, function(errorObject) {
     console.log("The read failed: " + errorObject.code);
   });
 
 // api calls
 
-// if no firebase data, prompt profile creation
 
-// post new user info to firebase
 
 // giphy api button stuff
+$("#button-for-giphs").click(function(){
+var inputsArray = [];
+var userInput = $("#user-selection").val().trim();
+inputsArray.push(userInput);
 
+
+
+$.ajax({
+    url: "https://api.giphy.com/v1/gifs/search",
+    APIKey: "4cK7PhqwwNF15DHlSkE0A2ttuyHL6uoX",
+    method: "GET",
+    q = inputsArray,
+    limit = 5
+}).then(function(data) {
+    // Log the resulting object
+    console.log(data);
+
+    $("#chatbox").append(data.image);
+
+  });
+});
 
 // translator api stuff
 var selectedLanguage = "";  // should be something like en, jp, etc. for reference look at google translate api
