@@ -33,9 +33,9 @@ var config = {
 
     else {
         //modal to display with profile creation questions
-        // if no firebase data, prompt profile creation
         $("#modal").modal(show);
-
+        
+        $("#submit-button").click(function() {
         //grab info from modal input boxes
         userName = $("#modal-userName").val().trim;
         password = $("#modal-password").val().trim;
@@ -51,23 +51,15 @@ var config = {
         
         //push new user to database
         database.ref().push(newUser);
+        //alert that user has been added - another modal?
     }
-    
-}, function(errorObject) {
-    console.log("The read failed: " + errorObject.code);
-  });
-
-// api calls
-
-
+  )};
 
 // giphy api button stuff
 $("#button-for-giphs").click(function(){
 var inputsArray = [];
 var userInput = $("#user-selection").val().trim();
 inputsArray.push(userInput);
-
-
 
 $.ajax({
     url: "https://api.giphy.com/v1/gifs/search",
@@ -79,7 +71,7 @@ $.ajax({
     // Log the resulting object
     console.log(data);
 
-    $("#chatbox").append(data.image);
+    $("#giph-scroll-img").append(data.image);
 
   });
 });
