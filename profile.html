@@ -38,14 +38,64 @@
         <div class="row">
           <div class="col-md-3" id="profileInfo">
               Profile will go here
-                There should be a display picture, and some info 
-                And a button??
+              <a href="https://placeholder.com"><img src="https://via.placeholder.com/200x200"></a>
+              <p>Name</p>
+              <p>Email</p>
+              <p>Default Language</p>
+              <p>Location</p>
+              <p>Profile Text Blurb</p>
+              <p>Last Login:</p>
+
+        
           </div>
           <div class="col-md-7" id="profileDetails">
-              Add a form in here for users to update their details.
-              <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris pharetra suscipit erat, id finibus massa imperdiet eget. Ut semper fermentum eros sed pellentesque. Etiam dapibus nulla sit amet leo posuere mollis. Mauris laoreet tellus urna, ultricies suscipit nisl tempor ut. Sed sagittis eget erat vel ultrices. Integer nulla nibh, finibus eu ullamcorper non, lobortis pretium justo. Aliquam diam lectus, dapibus elementum cursus vitae, egestas sed lacus. Aenean a feugiat elit. Duis porttitor felis sit amet mauris tempor vulputate. Vestibulum in neque mi. Suspendisse potenti. Quisque nec sapien nisl. Vivamus at scelerisque urna. Cras varius vehicula tortor nec pellentesque. Nulla turpis risus, ultrices sit amet nisi non, vehicula bibendum ligula.
-            </p>
+              Users update their details here.
+              <form>
+                    <div class="form-group">
+                      <label for="exampleFormControlInput1">Username</label>
+                      <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name">
+                    </div>
+                    <div class="form-group">
+                            <label for="exampleFormControlInput1">Email address</label>
+                            <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
+                          </div>
+
+                          <div class="form-group">
+                                <label for="exampleFormControlSelect1">Country Select:</label>
+                                <select class="form-control" id="exampleFormControlSelect1">
+                                  <option>1</option>
+                                  <option>2</option>
+                                  <option>3</option>
+                                  <option>4</option>
+                                  <option>5</option>
+                                </select>
+                              </div>
+
+                              <div class="form-group">
+                                    <label for="exampleFormControlSelect1">Default Language:</label>
+                                    <select class="form-control" id="exampleFormControlSelect1">
+                                      <option>1</option>
+                                      <option>2</option>
+                                      <option>3</option>
+                                      <option>4</option>
+                                      <option>5</option>
+                                    </select>
+                                  </div>
+                    
+                    <div class="form-group">
+                      <label for="exampleFormControlTextarea1">Profile text (Limited to a certain amount of characters)</label>
+                      <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="My name is Jerry and I love cheetos!"></textarea>
+                    </div>
+                  </form>
+                  <form>
+                      Upload New Profile Photo:
+                        <div class="form-group">
+                
+                          <input type="file" class="form-control-file" id="exampleFormControlFile1">
+                        </div>
+                      </form>
+
+                      <button id="save">Save Changes</button>
           </div>
     
         </div>

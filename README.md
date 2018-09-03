@@ -1,2 +1,2 @@
-# groupProject1
-tangent translation app
+# Lexicon
+Lexicon translation app

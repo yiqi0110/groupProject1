@@ -36,9 +36,34 @@
     <!--Jumbotron-->
               <div class="jumbotron">
                     <h1 class="display-4">Get Started Here!</h1>
-                    <p class="lead">Here is where we'll describe how users can create a profile and get started chatting!</p>
-                    
+                    <p class="lead">Here is where we'll describe how users can create a profile and get started chatting! We will be changing this with JS to change the order of how things appear. It will begin with ONLY this text paragraph, the form part will start off hidden. Upon clicking "Let's Chat", the code will reveal the Form and replace the paragraph text. This way a new user can get started quickly.</p>
+                    <form>
+                            <div class="form-group">
+                              <label for="exampleFormControlInput1">Email address</label>
+                              <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
+                            </div>
+                            <div class="form-group">
+                                    <label for="exampleFormControlInput1">Username</label>
+                                    <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name">
+                                  </div>
+                                  <div class="form-group">
+                                        <label for="exampleFormControlInput1">Password</label>
+                                        <input type="email" class="form-control" id="exampleFormControlInput1" >
+                                      </div>
+                            <div class="form-group">
+                              <label for="exampleFormControlSelect1">Select Location:</label>
+                              <select class="form-control" id="exampleFormControlSelect1">
+                                <option>1</option>
+                                <option>2</option>
+                                <option>3</option>
+                                <option>4</option>
+                                <option>5</option>
+                              </select>
+                            </div>
+                        
+                          </form>
                     <a class="btn btn-primary btn-lg" href="#" role="button">Let's Chat!</a>
+                    <a href="#" id="hide">Hide this</a>
                   </div>
 
     <!--Chatroom and Side panel-->
@@ -64,13 +89,15 @@
                 <p></p>
               </div>
               <div class="col-md-2" id="sidebar">
-                This is where the sidebar will appear
-                Side bar side bar side bar side bar
-                Side bar side bar side bar side bar
-                Side bar side bar side bar side bar
-                Side bar side bar side bar side bar
-                Side bar side bar side bar side bar
-                <p></p>
+            
+                <h5>Chatroom Users:</h5>
+                <p>Username</p>
+                <p>Username</p>
+                <p>Username</p>
+                <p>Username</p>
+                <p>Username</p>
+                <p>Username</p>
+                
               </div>
         
             </div>
