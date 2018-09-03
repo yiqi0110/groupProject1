@@ -5,6 +5,11 @@
 // variable declarations
 //===========================================================================
 
+// translator api stuff
+var selectedLanguage = ""; // should be something like en, jp, etc. for reference look at google translate api
+var translatedLanguage = ""; // same stuff from above
+var translatedText = ""; // any text you want to translate from sl to tl . . .
+var translation = "";   // the translated text
 
 // function declarations
 //===========================================================================
@@ -18,8 +23,7 @@
 // post new user info to firebase
 
 // giphy api button stuff  
-var supportedLanguages = [
-    {
+var supportedLanguages = [{
         languageNames: "Afrikaans",
         symbol: "af"
     },
@@ -157,7 +161,7 @@ var supportedLanguages = [
     },
     {
         languageNames: "Hebrew",
-        symbol: "he" 
+        symbol: "he"
     },
     {
         languageNames: "Hindi",
@@ -439,27 +443,45 @@ var supportedLanguages = [
 
 console.log(supportedLanguages.length);
 
-for (var i = 0; i < supportedLanguages.length; i++){
-    
-}
 
-// translator api stuff
-var selectedLanguage = "en"; // should be something like en, jp, etc. for reference look at google translate api
-var translatedLanguage = "ja"; // same stuff from above
-var translatedText = "hello"; // any text you want to translate from sl to tl . . .
-var translateURL = "https://translate.googleapis.com/translate_a/single?client=gtx&sl=" + selectedLanguage + "&tl=" + translatedLanguage + "&dt=t&q=" + translatedText;
-
-$.ajax({
-    url: translateURL,
-    method: "GET"
-}).then(function (translator) {
-    console.log(translator[0][0][0]); // this is the tl response
-    console.log(translator[0][0][1]); // this is the sl response
-});
+function translateAPI(sl, tl, tt) {
+    selectedLanguage = sl;
+    translatedLanguage = tl;
+    translatedText = tt;
+    var translateURL = "https://translate.googleapis.com/translate_a/single?client=gtx&sl=" + selectedLanguage + "&tl=" + translatedLanguage + "&dt=t&q=" + translatedText;
+    $.ajax({
+        url: translateURL,
+        method: "GET"
+    }).then(function (translator) {
+        // console.log(translator[0][0][0]); // this is the tl response
+        // console.log(translator[0][0][1]); // this is the sl response
+        translation = translator[0][0][1];
+    });
+};
 
 
 // function functionality
 //===========================================================================
+
+// for translating the languages into their languages, ya
+for (var i = 0; i < supportedLanguages.length; i++) {
+    var pickingYourLanguage = translateAPI("en", supportedLanguages[i].symbol, supportedLanguages[i].languageNames);
+    console.log(translation);
+    // Where we take in the users language as the variable
+    var sl = $("select#languageList");
+    sl.append($("<option>" + pickingYourLanguage + "</option>"));
+}; // end of language select thing
+
+
+// Any input that is put into the chat box will be sent as the users language and the translated to the other users language
+$("#text2TranslateInChat").on("sumbit", function () {
+    // takes set language from user
+    selectedLanguage = '#';
+    // takes language to be translate to
+    translatedLanguage = '#';
+    // takes the text 2 be translated
+    translatedText = '#';
+}); // end of input retrieval
 
 // sign in or create profile or anonymous profile
 
