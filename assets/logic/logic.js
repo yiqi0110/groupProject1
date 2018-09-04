@@ -1,12 +1,11 @@
 // anything we want to have happen before the page starts
 //===========================================================================
-$("#modal").modal(hide);
 
 // variable declarations
 //===========================================================================
 var userName = "";
 var password = "";
-var language = "";
+var email = "";
 
 // function declarations
 //===========================================================================
@@ -32,21 +31,21 @@ var config = {
       }
 
     else {
-        //modal to display with profile creation questions
-        $("#modal").modal(show);
         
-        $("#submit-button").click(function() {
+        $("#create-profile").click(function() {
         //grab info from modal input boxes
-        userName = $("#modal-userName").val().trim;
-        password = $("#modal-password").val().trim;
-        language = $("#modal-language").val().trim;
+        userName = $("#userName").val().trim;
+        password = $("#password").val().trim;
+        language = $("#language").val().trim;
+        email = $("#email").val().trim;
 
         //set info to database
         // post new user info to firebase
         database.ref().set({
             userName: userName,
             password: password,
-            language: setLanguage
+            language: setLanguage,
+            email: email
         });
         
         //push new user to database
