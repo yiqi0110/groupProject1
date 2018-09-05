@@ -35,8 +35,28 @@
 
     <!--Jumbotron-->
               <div class="jumbotron">
-                    <h1 class="display-4">Get Started Here!</h1>
-                    <p class="lead">Here is where we'll describe how users can create a profile and get started chatting! We will be changing this with JS to change the order of how things appear. It will begin with ONLY this text paragraph, the form part will start off hidden. Upon clicking "Let's Chat", the code will reveal the Form and replace the paragraph text. This way a new user can get started quickly.</p>
+
+                <div class="row">
+
+                      <div class="col-md-6">
+                            <h1 class="display-4"><img src="assets/images/logo.png"></h1>
+                      </div> 
+
+                                <div class="col-md-6">
+                                              <p class="lead">Welcome to lexicon global chat room, 
+                                                  the app that allows you to chat with friends of 
+                                                  any language across the world! 
+                                                  <br>
+                                                  <br>
+                                                  Sign up with a username to enjoy the translation 
+                                                  and fiend finder features of lexicon. 
+                                                </p>
+                                  <a class="btn btn-primary btn-lg" href="#" role="button">Let's Get Started</a>                
+
+
+                                </div>
+                
+                </div>                  
                     <form id="SignUp">
                             <div class="form-group">
                               <label for="exampleFormControlInput1">Email address</label>
@@ -88,9 +108,31 @@
     <div class="container">
             <div class="row">
               <div class="col-md-8" id="globalChat">
-                  Chatbox will go here
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris pharetra suscipit erat, id finibus massa imperdiet eget. Ut semper fermentum eros sed pellentesque. Etiam dapibus nulla sit amet leo posuere mollis. Mauris laoreet tellus urna, ultricies suscipit nisl tempor ut. Sed sagittis eget erat vel ultrices. Integer nulla nibh, finibus eu ullamcorper non, lobortis pretium justo. Aliquam diam lectus, dapibus elementum cursus vitae, egestas sed lacus. Aenean a feugiat elit. Duis porttitor felis sit amet mauris tempor vulputate. Vestibulum in neque mi. Suspendisse potenti. Quisque nec sapien nisl. Vivamus at scelerisque urna. Cras varius vehicula tortor nec pellentesque. Nulla turpis risus, ultrices sit amet nisi non, vehicula bibendum ligula.
+
+                    <div class="chatbox">
+                    Chatbox will go here
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris pharetra suscipit erat, 
+                    id finibus massa imperdiet eget. Ut semper fermentum eros sed pellentesque. 
+                    Etiam dapibus nulla sit amet leo posuere mollis. Mauris laoreet tellus urna, 
+                    ultricies suscipit nisl tempor ut. Sed sagittis eget erat vel ultrices. 
+                    Integer nulla nibh, finibus eu ullamcorper non, lobortis pretium justo. 
+                    Aliquam diam lectus, dapibus elementum cursus vitae, egestas sed lacus. 
+                    Aenean a feugiat elit. Duis porttitor felis sit amet mauris tempor vulputate. 
+                    Vestibulum in neque mi. Suspendisse potenti. Quisque nec sapien nisl. Vivamus at scelerisque urna. 
+                    Cras varius vehicula tortor nec pellentesque. Nulla turpis risus, ultrices sit amet nisi non, vehicula bibendum ligula.
+                    </div>
+                    
+                    <div class="form-group">
+                    <label for="comment">Comment:</label>
+                    <textarea class="form-control" rows="5" id="comment" placeholder="Type your message here"></textarea>
+                    </div>
+                    <a class="btn btn-primary btn-lg" href="#" role="button">Send Message</a>                
+
+                           
                 <p></p>
+
+
+
               </div>
               <div class="col-md-2" id="chatUsers">
             
