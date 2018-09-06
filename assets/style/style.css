@@ -2,3 +2,42 @@ footer {
     text-align: center;
 }
 
+
+.jumbotron { 
+    color: white; 
+    background-color: #2e3191;
+
+}
+
+.btn-primary { 
+    color: white; 
+    background-color: #409661;
+    
+}
+
+
+#globalChat { 
+    height:500px;
+    border:1px solid #ccc;
+    font:16px/26px;
+    overflow:auto;
+    background-color: #efefef; 
+    
+
+}
+
+.modal-header, h4, .close {
+    background-color: #5cb85c;
+    color:white !important;
+    text-align: center;
+    font-size: 30px;
+    padding:35px 50px;
+}
+
+.modal-body{
+    padding:40px 50px;
+}
+
+.modal-footer {
+    background-color: #f9f9f9;
+}
