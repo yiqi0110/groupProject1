@@ -1,12 +1,13 @@
 // anything we want to have happen before the page starts
 //===========================================================================
 
-
 // variable declarations
 //===========================================================================
 
 var userName = "";
 var password = "";
+
+var email = "";
 
 // translator api stuff
 var selectedLanguage = ""; // should be something like en, jp, etc. for reference look at google translate api
@@ -39,25 +40,49 @@ var config = {
 
     else {
         
+        $("#create-profile").click(function() {
+        //grab info from modal input boxes
+        userName = $("#userName").val().trim;
+        password = $("#password").val().trim;
+        language = $("#language").val().trim;
+        email = $("#email").val().trim;
+
+        //set info to database
+        // post new user info to firebase
+        database.ref().set({
+            userName: userName,
+            password: password,
+            language: setLanguage,
+            email: email
+        });
+        
+        //push new user to database
+        database.ref().push(newUser);
+        //alert that user has been added - another modal?
     }
+  )};
 
+// giphy api button stuff
+$("#button-for-giphs").click(function(){
+var inputsArray = [];
+var userInput = $("#user-selection").val().trim();
+inputsArray.push(userInput);
 
-    console.log(userName);
-    console.log(language);
+$.ajax({
+    url: "https://api.giphy.com/v1/gifs/search",
+    APIKey: "4cK7PhqwwNF15DHlSkE0A2ttuyHL6uoX",
+    method: "GET",
+    q = inputsArray,
+    limit = 5
+}).then(function(data) {
+    // Log the resulting object
+    console.log(data);
 
-    // post new user info to firebase
-    database.ref().set({
-        userName: userName,
-        password: password,
-        userInfo: userInfo,
-        language: setLanguage
-    });
-    
+    $("#giph-scroll-img").append(data.image);
 
-
-}, function(errorObject) {
-    console.log("The read failed: " + errorObject.code);
   });
+// });
+
 
 // api calls
 
@@ -539,3 +564,14 @@ $("#text2TranslateInChat").on("sumbit", function () {
 // giphy stuff from last project in a scroll menu to choose from
 
 // gif post into the chatroom
+
+//language dropdown option
+var langOptions = langArray;
+        var mySelect = $('#langSelect');
+        $.each(langOptions, function(val, text) {
+            mySelect.append(
+                $('<option></option>').val(val).html(text)
+            );
+        });
+        console.log(langOptions);
+        
