@@ -13,7 +13,7 @@ var email = "";
 var selectedLanguage = ""; // should be something like en, jp, etc. for reference look at google translate api
 var translatedLanguage = ""; // same stuff from above
 var translatedText = ""; // any text you want to translate from sl to tl . . .
-var translation = "";   // the translated text
+var translation = ""; // the translated text
 
 // function declarations
 //===========================================================================
@@ -26,62 +26,61 @@ var config = {
     projectId: "project1-8d0be",
     storageBucket: "project1-8d0be.appspot.com",
     messagingSenderId: "799117703087"
-  };
-  firebase.initializeApp(config);
-  
-  var database = firebase.database();
+};
+firebase.initializeApp(config);
 
-  database.ref().on("value", function(snapshot) {
+var database = firebase.database();
+
+database.ref().on("value", function (snapshot) {
     if (snapshot.child("userName").exists() && snapshot.child("language").exists()) {
-    // Set the variables for userName and language equal to the stored values if they exist
+        // Set the variables for userName and language equal to the stored values if they exist
         userName = snapshot.val().userName;
         language = snapshot.val().language;
-      }
+    } else {
 
-    else {
-        
-        $("#create-profile").click(function() {
-        //grab info from modal input boxes
-        userName = $("#userName").val().trim;
-        password = $("#password").val().trim;
-        language = $("#language").val().trim;
-        email = $("#email").val().trim;
+        $("#create-profile").click(function () {
+            //grab info from modal input boxes
+            userName = $("#userName").val().trim;
+            password = $("#password").val().trim;
+            language = $("#language").val().trim;
+            email = $("#email").val().trim;
 
-        //set info to database
-        // post new user info to firebase
-        database.ref().set({
-            userName: userName,
-            password: password,
-            language: setLanguage,
-            email: email
+            //set info to database
+            // post new user info to firebase
+            database.ref().set({
+                userName: userName,
+                password: password,
+                language: setLanguage,
+                email: email
+            });
+
+            //push new user to database
+            database.ref().push(newUser);
+            //alert that user has been added - another modal?
+        })
+    };
+
+    // giphy api button stuff
+    $("#button-for-giphs").click(function () {
+        var inputsArray = [];
+        var userInput = $("#user-selection").val().trim();
+        inputsArray.push(userInput);
+
+        $.ajax({
+            url: "https://api.giphy.com/v1/gifs/search",
+            APIKey: "4cK7PhqwwNF15DHlSkE0A2ttuyHL6uoX",
+            method: "GET",
+            q: inputsArray,
+            limit: 5
+        }).then(function (data) {
+            // Log the resulting object
+            console.log(data);
+
+            $("#giph-scroll-img").append(data.image);
+
         });
-        
-        //push new user to database
-        database.ref().push(newUser);
-        //alert that user has been added - another modal?
-    }
-  )};
-
-// giphy api button stuff
-$("#button-for-giphs").click(function(){
-var inputsArray = [];
-var userInput = $("#user-selection").val().trim();
-inputsArray.push(userInput);
-
-$.ajax({
-    url: "https://api.giphy.com/v1/gifs/search",
-    APIKey: "4cK7PhqwwNF15DHlSkE0A2ttuyHL6uoX",
-    method: "GET",
-    q = inputsArray,
-    limit = 5
-}).then(function(data) {
-    // Log the resulting object
-    console.log(data);
-
-    $("#giph-scroll-img").append(data.image);
-
-  });
-// });
+    });
+});
 
 
 // api calls
@@ -567,11 +566,10 @@ $("#text2TranslateInChat").on("sumbit", function () {
 
 //language dropdown option
 var langOptions = langArray;
-        var mySelect = $('#langSelect');
-        $.each(langOptions, function(val, text) {
-            mySelect.append(
-                $('<option></option>').val(val).html(text)
-            );
-        });
-        console.log(langOptions);
-        
+var mySelect = $('#langSelect');
+$.each(langOptions, function (val, text) {
+    mySelect.append(
+        $('<option></option>').val(val).html(text)
+    );
+});
+console.log(langOptions);
