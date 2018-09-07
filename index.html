@@ -7,6 +7,7 @@
     <title>Lexicon</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <link rel="stylesheet" href="assets/style/style.css">
+ 
 </head>
 <body>
     <!--Navbar-->
@@ -26,51 +27,73 @@
                     <li class="nav-item">
                       <a class="nav-link" href="profile.html">Profile</a>
                     </li>
-                  </ul>
-                  <span class="navbar-text">
-                    Extra text, may need it maybe not
+                    </ul>
+                  
+                  <span class="navbar-nav mr-auto" id="logIn">
+                    <a class="nav-link" href="#">Login</a><a class="nav-link" href="#">Sign Up</a>
+                  
                   </span>
                 </div>
               </nav> 
 
     <!--Jumbotron-->
               <div class="jumbotron">
-                    <h1 class="display-4">Get Started Here!</h1>
-                    <p class="lead">Here is where we'll describe how users can create a profile and get started chatting! We will be changing this with JS to change the order of how things appear. It will begin with ONLY this text paragraph, the form part will start off hidden. Upon clicking "Let's Chat", the code will reveal the Form and replace the paragraph text. This way a new user can get started quickly.</p>
-                    <form id="SignUp">
-                            <div class="form-group">
-                              <label for="exampleFormControlInput1">Email address</label>
-                              <input type="email" class="form-control" id="emailAddress" placeholder="name@example.com">
-                            </div>
-                            <div class="form-group">
-                                    <label for="exampleFormControlInput1">Username</label>
-                                    <input type="text" class="form-control" id="username" placeholder="name">
-                                  </div>
-                                  <div class="form-group">
-                                        <label for="exampleFormControlInput1">Password</label>
-                                        <input type="password" class="form-control" id="password" >
-                                      </div>
-                                      <div class="form-group">
-                                            <label for="exampleFormControlInput1">Confirm Password</label>
-                                            <input type="password" class="form-control" id="confirmPassword" >
-                                          </div>
-                            <div class="form-group">
-                              <label for="exampleFormControlSelect1">Select Location:</label>
-                              <select class="form-control" id="selectLocation">
-                                <option>1</option>
-                                <option>2</option>
-                                <option>3</option>
-                                <option>4</option>
-                                <option>5</option>
-                              </select>
-                            </div>
-                        
-                          </form>
-                    <a class="btn btn-primary btn-lg" href="#" role="button">Let's Chat!</a>
-                    <a href="#" id="hide">Hide this</a>
+                    <h1 class="display-4">Lexicon</h1>
+                    <p class="lead">Welcome to lexicon global chat room, the app that allows you to chat with friends of any language across the world!</p>
+                 
+
+    <!--Sign Up Modal-->
+
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+        Get Started!
+      </button>
+    <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id="myModal">
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+              <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">Quick Start</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                  </button>
                   </div>
+              <form id="SignUp">
+                  <div class="form-group">
+                    <label for="exampleFormControlInput1">Email address</label>
+                    <input type="email" class="form-control" id="emailAddress" placeholder="name@example.com">
+                  </div>
+                  <div class="form-group">
+                          <label for="exampleFormControlInput1">Username</label>
+                          <input type="text" class="form-control" id="username" placeholder="name">
+                        </div>
+                        <div class="form-group">
+                              <label for="exampleFormControlInput1">Password</label>
+                              <input type="password" class="form-control" id="password" >
+                            </div>
+                            <div class="form-group">
+                                  <label for="exampleFormControlInput1">Confirm Password</label>
+                                  <input type="password" class="form-control" id="confirmPassword" >
+                                </div>
+                  <div class="form-group">
+                    <label for="exampleFormControlSelect1">Select Location:</label>
+                    <select class="form-control" id="selectLocation">
+                      <option>United States</option>
+                      <option>2</option>
+                      <option>3</option>
+                      <option>4</option>
+                      <option>5</option>
+                    </select>
+                  </div>
+              
+                </form>
+                <a class="btn btn-primary" href="#" role="button">Sign me up!</a>
+              
+          </div>
+        </div>
+      </div>
+              </div>
 
     <!--Chatroom and Side panel-->
+    <div class="container">
     <form>
             
             <div class="form-group">
@@ -83,14 +106,44 @@
                 <option>5</option>
               </select>
               <button id="text2TranslateInChat">Select</button>
+              <p>(when select button is clicked, display "Translating...")</p>
             </div>
             </form>
+    </div>
     <div class="container">
+      <div class="row">
+          <div class="col-md-8" id="chatHeader">
+             Header goes here
+            
+          </div>
+          <div class="col-md-2" id="userHeader">
+        
+            Header goes here
+            
+          </div>
+
+      </div>
             <div class="row">
               <div class="col-md-8" id="globalChat">
                   Chatbox will go here
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris pharetra suscipit erat, id finibus massa imperdiet eget. Ut semper fermentum eros sed pellentesque. Etiam dapibus nulla sit amet leo posuere mollis. Mauris laoreet tellus urna, ultricies suscipit nisl tempor ut. Sed sagittis eget erat vel ultrices. Integer nulla nibh, finibus eu ullamcorper non, lobortis pretium justo. Aliquam diam lectus, dapibus elementum cursus vitae, egestas sed lacus. Aenean a feugiat elit. Duis porttitor felis sit amet mauris tempor vulputate. Vestibulum in neque mi. Suspendisse potenti. Quisque nec sapien nisl. Vivamus at scelerisque urna. Cras varius vehicula tortor nec pellentesque. Nulla turpis risus, ultrices sit amet nisi non, vehicula bibendum ligula.
-                
+                    <!--Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris pharetra suscipit erat, id finibus massa imperdiet eget. Ut semper fermentum eros sed pellentesque. Etiam dapibus nulla sit amet leo posuere mollis.
+                       Mauris laoreet tellus urna, ultricies suscipit nisl tempor ut. Sed sagittis eget erat vel ultrices. Integer nulla nibh, finibus eu ullamcorper non, lobortis pretium justo. Aliquam diam lectus, dapibus elementum cursus vitae, 
+                       egestas sed lacus. Aenean a feugiat elit. Duis porttitor felis sit amet mauris tempor vulputate. Vestibulum in neque mi. Suspendisse potenti. Quisque nec sapien nisl. Vivamus at scelerisque urna. Cras varius vehicula tortor 
+                       nec pellentesque. Nulla turpis risus, ultrices sit amet nisi non, vehicula bibendum ligula.-->
+                       <div id="wrapper">
+                          <div id="menu">
+                              <p class="welcome">Welcome, <b></b></p>
+                              <p class="logout"><a id="exit" href="#">Exit Chat</a></p>
+                              <div style="clear:both"></div>
+                          </div>
+                           
+                          <div id="chatbox"></div>
+                           
+                          <form name="message" action="">
+                              <input name="usermsg" type="text" id="usermsg" size="63" />
+                              <input name="submitmsg" type="submit"  id="submitmsg" value="Send" />
+                          </form>
+                      </div>
               </div>
               <div class="col-md-2" id="chatUsers">
             
@@ -130,5 +183,6 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
         crossorigin="anonymous"></script>
     <script src="assets/logic/logic.js"></script>
+  
 </body>
 </html>

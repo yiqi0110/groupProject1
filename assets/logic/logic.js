@@ -1,5 +1,8 @@
 // anything we want to have happen before the page starts
 //===========================================================================
+$(window).on('load',function(){
+    $('#myModal').modal('show');
+});
 
 
 // variable declarations
