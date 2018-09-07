@@ -29,7 +29,7 @@ var translateURL = "https://translate.googleapis.com/translate_a/single?client=g
 $.ajax({
     url: queryURL,
     method: "GET"
-}).then(function (response) {
+}).then(function (response) {});
 
 
 // function functionality
