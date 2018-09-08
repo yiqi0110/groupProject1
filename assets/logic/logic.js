@@ -6,7 +6,11 @@ $(document).ready(function(){
       console.log('click');
       $("#usermsg").val('');
     });
-})
+    $("#myBtn").click(function () {
+        $("#myModal").modal();
+    });
+    lang();
+});
     
  
 
@@ -14,12 +18,7 @@ $(document).ready(function(){
 // anything we want to have happen before the page starts
 //===========================================================================
 //modal function call for login prompt
-$(document).ready(function () {
-    $("#myBtn").click(function () {
-        $("#myModal").modal();
-    });
-    lang();
-});
+
 
 
 var config = {
@@ -595,3 +594,17 @@ $.each(langOptions, function (val, text) {
 });
 // console.log(langOptions);
 
+//Profile page code//
+    // var name = $("#name")
+    // var profileEmail = $("#")
+    // var defaultLang = $("#")
+    // var userLocation = $("#")
+    // var lastLogin = $("#")
+
+    // if document.onclick($("#save")) {
+    //     $("#username").append(name);
+    //     $("#emailAddress").append(profileEmail);
+    //     $("#languageSelect").append(defaultLang);
+    //     $("#countrySelect").append(userLocation);
+    //     $("#lastLogin").append(lastLogin);
+    // }
