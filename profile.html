@@ -11,27 +11,26 @@
 <body>
     <!--Navbar-->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <a class="navbar-brand" href="#">Lexicon</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
-              <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarText">
-              <ul class="navbar-nav mr-auto">
-                <li class="nav-item">
-                  <a class="nav-link" href="index.html">Home </a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="map.html">Map</a>
-                </li>
-                <li class="nav-item active">
-                  <a class="nav-link" href="profile.html">Profile <span class="sr-only">(current)</span></a>
-                </li>
-              </ul>
-              <span class="navbar-text">
-                Extra text, may need it maybe not
-              </span>
-            </div>
-          </nav> 
+      <a class="navbar-brand" href="#">Lexicon</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarText">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="index.html">Home</a>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link" href="profile.html">Profile <span class="sr-only">(current)</span></a>
+          </li>
+          </ul>
+        
+        <span class="navbar-nav mr-auto" id="logIn">
+          <a class="nav-link" href="#">Login</a><a class="nav-link" href="#">Sign Up</a>
+        
+        </span>
+      </div>
+    </nav> 
 
    <div class="container">
         <div class="row">
@@ -61,11 +60,11 @@
                           </div>
                     <div class="form-group">
                             <label for="exampleFormControlInput1">New Password</label>
-                            <input type="password" class="form-control" id="password" placeholder="name">
+                            <input type="password" class="form-control" id="password" placeholder="">
                           </div>
                           <div class="form-group">
                                 <label for="exampleFormControlInput1">Confirm Password</label>
-                                <input type="password" class="form-control" id="confirmPassword" placeholder="name">
+                                <input type="password" class="form-control" id="confirmPassword" placeholder="">
                               </div>
                     <div class="form-group">
                             <label for="exampleFormControlInput1">Email address</label>
@@ -117,7 +116,7 @@
             <div class="row">
             
     
-              <div class="col">
+              <div class="col" id="usersChattedWith">
           <h5>Users You Have Chatted With:</h5>
                 <p>user1</p>
                 <p>user2</p>
@@ -125,7 +124,7 @@
                 <p>user4</p>
                 <p>user5</p>
                 </div>
-                <div class="col">
+                <div class="col" id="yourFriends">
                         <h5>Your Friends:</h5>
                               <p>user1</p>
                               <p>user2</p>

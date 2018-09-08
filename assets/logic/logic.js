@@ -1,8 +1,18 @@
+$(document).ready(function(){
+    $("#submitmsg").click(function(event) {
+    event.preventDefault();
+      var toAdd = $('#usermsg').val();
+      $("#chatbox").append(toAdd + "<br>");
+      console.log('click');
+      $("#usermsg").val('');
+    });
+})
+    
+ 
+
+
 // anything we want to have happen before the page starts
 //===========================================================================
-$(window).on('load',function(){
-    $('#myModal').modal('show');
-});
 
 
 // variable declarations
@@ -22,17 +32,8 @@ $(window).on('load',function(){
 
 // giphy api button stuff
 
-
 // translator api stuff
-var selectedLanguage = "";  // should be something like en, jp, etc. for reference look at google translate api
-var translatedLanguage = "";    // same stuff from above
-var translatedText = "";    // any text you want to translate from sl to tl . . .
-var translateURL = "https://translate.googleapis.com/translate_a/single?client=gtx&sl=" + selectedLanguage + "&tl=" + translatedLanguage + "&dt=t&q=" + translatedText;
 
-$.ajax({
-    url: queryURL,
-    method: "GET"
-}).then(function (response) {
 
 
 // function functionality
@@ -47,6 +48,11 @@ $.ajax({
 // anonymous ==> set language
 
 // on.click submit to translator as well as submit text to chat
+
+
+//submit text to chat 
+
+
 
 // giphy stuff from last project in a scroll menu to choose from
 

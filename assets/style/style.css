@@ -1,6 +1,46 @@
+h2 { 
+
+    float: left; 
+}
+
+
+
 footer {
     text-align: center;
+  
 }
+
+
+.jumbotron { 
+    color: white; 
+    background-color: #2e3191;
+
+}
+
+.btn-primary { 
+    color: white; 
+    background-color: #409661;
+    
+}
+
+
+#chatroom { 
+    height:500px;
+    border:1px solid #ccc;
+    font:16px/26px;
+    overflow:auto;
+    background-color: #efefef; 
+    padding: 10px;
+    margin-bottom: 2rem;
+    
+
+}
+
+.lead { 
+
+
+}
+
 #logIn {
     float: right;
     text-align: right;
@@ -9,19 +49,35 @@ footer {
 }
 
 #chatHeader {
-    background-color: blue;
-    padding: 10px 15px 10px 15px;
-    margin: 0 10px 0 0;
+    background-color:#1b9dd0;
+    position: 0px 0px 0px 15px;
     color: white;
     text-align: center;
+    padding: 20px;
+ 
+   
 }
 
-#userHeader {
-    background-color: blue;
+
+.userBox {
+    background-color:#efefef; 
+    border-bottom-color: white;
     color: white;
-    padding: 10px 15px 10px 15px;
-    margin: 0 10px 0 0;
+    height: 100px;
+    left: 15px; 
+    width: 100%
+  
+}
+
+
+#userHeader {
+    background-color:#1b9dd0;
+    color: white;
+    left: 15px; 
+    padding: 20px;
     text-align: center;
+    width: 85%
+  
 }
 /* chatbox css */
 form, p, span {
@@ -73,3 +129,112 @@ a {
 .logout { float:right; }
   
 .msgln { margin:0 0 2px 0; }
+
+row { 
+    text-align: left;
+
+}
+
+#chatExplainer { 
+    text-align: left; 
+}
+
+#userExplainer { 
+    text-align: left; 
+}
+
+#logoHolder { 
+   
+    padding: 0px 0px 0px 200px;
+
+}
+
+#logo { 
+
+    height: 200px;
+}
+
+.modal-header { 
+
+    background-color: #1b9dd0;
+    color: white;
+}
+
+#SignUp { 
+
+    padding: 30px; 
+
+}
+.modal-content { 
+padding: 0px 0px 50px 0px
+}
+
+.form-group btn { 
+    align: right;
+}
+
+#selectLanguageBox { 
+
+    background-color: #efefef;
+    padding: 20px;
+    margin: 0 0 0 0;
+    margin-bottom: 20px; 
+  
+}
+
+#text2TranslateInChat { 
+    color: white; 
+    background-color: #409661;
+    margin: 20px;
+    
+
+}
+
+#profileInfo {
+    margin: 10px;
+    padding: 10px;
+    background: #1b9dd0;
+    text-align: center;
+}
+#profileInfo.img {
+    align-content: center;
+}
+
+#profileDetails {
+    margin: 10px;
+    padding: 20px;
+    border:1px solid #ACD8F0;
+}
+
+#usersChattedWith {
+    margin: 10px;
+    padding: 10px;
+    border:1px solid #1b9dd0;
+    text-align: center;
+}
+
+#yourFriends {
+    margin: 10px;
+    padding: 10px;
+    border:1px solid #1b9dd0;
+    text-align: center;
+}
+
+h5 {
+    background: #ACD8F0;
+    text-align: center;
+}
+
+.userBox {
+    text-align: enter;
+    height: 100px;
+}
+
+#msg {
+    padding: 0 0 0 0;
+    margin-left: 30px;
+}
+.card-body {
+   
+    padding: 0;
+}

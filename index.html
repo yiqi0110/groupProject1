@@ -21,9 +21,7 @@
                     <li class="nav-item active">
                       <a class="nav-link" href="index.html">Home <span class="sr-only">(current)</span></a>
                     </li>
-                    <li class="nav-item">
-                      <a class="nav-link" href="map.html">Map</a>
-                    </li>
+                    
                     <li class="nav-item">
                       <a class="nav-link" href="profile.html">Profile</a>
                     </li>
@@ -37,16 +35,38 @@
               </nav> 
 
     <!--Jumbotron-->
-              <div class="jumbotron">
-                    <h1 class="display-4">Lexicon</h1>
-                    <p class="lead">Welcome to lexicon global chat room, the app that allows you to chat with friends of any language across the world!</p>
+    <div class="jumbotron">
+
+        <div class="row">
+
+              <div class="col-md-6" id="logoHolder">
+                    <h1 class="display-4"><img src="assets/images/logo.png" id="logo"></h1>
+              </div> 
+                        <div class="col-md-4">
+                                      <p class="lead">Welcome to lexicon global chat room, 
+                                          the app that allows you to chat with friends of 
+                                          any language across the world! 
+                                          <br>
+                                          <br>
+                                          Sign up with a username to enjoy the translation 
+                                          and fiend finder features of lexicon. 
+                                        </p>
+                                        <br>
+                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+                                            Get Started!
+                                          </button>                                      
+
+
+                        </div>
+        
+        </div>                  
+            
+    </div>
                  
 
     <!--Sign Up Modal-->
 
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
-        Get Started!
-      </button>
+    
     <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id="myModal">
         <div class="modal-dialog modal-lg">
           <div class="modal-content">
@@ -83,9 +103,11 @@
                       <option>5</option>
                     </select>
                   </div>
+                  <br>
+                  <a class="btn btn-primary" href="#" role="button">Sign me up!</a>
               
                 </form>
-                <a class="btn btn-primary" href="#" role="button">Sign me up!</a>
+             
               
           </div>
         </div>
@@ -93,11 +115,11 @@
               </div>
 
     <!--Chatroom and Side panel-->
-    <div class="container">
+    <div class="container" id="selectLanguageBox">
     <form>
             
             <div class="form-group">
-              <label for="exampleFormControlSelect1">Select Your Language:</label>
+              <h3>Select Your Language:</h3>
               <select class="form-control" id="languageList">
                 <option>1</option>
                 <option>2</option>
@@ -105,27 +127,43 @@
                 <option>4</option>
                 <option>5</option>
               </select>
-              <button id="text2TranslateInChat">Select</button>
+              <button class="btn btn-primary" id="text2TranslateInChat">Select</button>
               <p>(when select button is clicked, display "Translating...")</p>
             </div>
-            </form>
+ </form>
+
+
+</div>
     </div>
     <div class="container">
-      <div class="row">
+      <div class="row"><script></script>
           <div class="col-md-8" id="chatHeader">
-             Header goes here
+            <h2>Global Chat:</h2>
             
+          <div class="row">
+              <div class="col" id="chatExplainer">
+              The responses below are all translated into your native language.  Type your response below to join the global conversation!  
+              </div>           
           </div>
-          <div class="col-md-2" id="userHeader">
-        
-            Header goes here
-            
-          </div>
-
+             
+         
       </div>
+      
+          <div class="col-md-4" id="userHeader">
+            <h2>Users:</h2>   
             <div class="row">
-              <div class="col-md-8" id="globalChat">
-                  Chatbox will go here
+                <div class="col" id="userExplainer">
+                  Click on the users to view profile information
+                </div>
+            </div>
+            
+          </div>
+        </div>  
+        <br>
+      
+            <div class="row">
+              <div class="col-md-8" id="chatroom">
+                 
                     <!--Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris pharetra suscipit erat, id finibus massa imperdiet eget. Ut semper fermentum eros sed pellentesque. Etiam dapibus nulla sit amet leo posuere mollis.
                        Mauris laoreet tellus urna, ultricies suscipit nisl tempor ut. Sed sagittis eget erat vel ultrices. Integer nulla nibh, finibus eu ullamcorper non, lobortis pretium justo. Aliquam diam lectus, dapibus elementum cursus vitae, 
                        egestas sed lacus. Aenean a feugiat elit. Duis porttitor felis sit amet mauris tempor vulputate. Vestibulum in neque mi. Suspendisse potenti. Quisque nec sapien nisl. Vivamus at scelerisque urna. Cras varius vehicula tortor 
@@ -139,22 +177,29 @@
                            
                           <div id="chatbox"></div>
                            
-                          <form name="message" action="">
+                          <form name="message" action="" id="msg">
                               <input name="usermsg" type="text" id="usermsg" size="63" />
                               <input name="submitmsg" type="submit"  id="submitmsg" value="Send" />
                           </form>
                       </div>
               </div>
-              <div class="col-md-2" id="chatUsers">
-            
-                <h5>Chatroom Users:</h5>
-                <p>Username</p>
-                <p>Username</p>
-                <p>Username</p>
-                <p>Username</p>
-                <p>Username</p>
-                <p>Username</p>
+              <div class="col-md-4" id="chatUsers">
+              <br>
                 
+          <div class="row userBox">
+          <p>User Name<p> 
+          </div>
+          <div class="row userBox">
+          <p>User Name<p> 
+          </div>
+          <div class="row userBox">
+          <p>User Name<p> 
+          </div>
+          <div class="row userBox">
+              <p>User Name<p> 
+              </div>
+    
+
               </div>
         
             </div>
