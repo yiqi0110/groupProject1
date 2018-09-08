@@ -1,14 +1,4 @@
 $(document).ready(function(){
-    $("#submitmsg").click(function(event) {
-    event.preventDefault();
-      var toAdd = $('#usermsg').val();
-      $("#chatbox").text(toAdd);
-      console.log('click');
-    });
-})
-    
- 
-
 
 // anything we want to have happen before the page starts
 //===========================================================================
@@ -26,6 +16,21 @@ $(document).ready(function(){
 // api calls
 
 // if no firebase data, prompt profile creation
+
+/*$("#submitmsg").click(function(event) {
+    event.preventDefault();
+      
+    if (userName === false) { 
+
+        function open(x){
+            $(x).modal('show');
+        }    
+    }
+    });
+ */
+   
+
+
 
 // post new user info to firebase
 
@@ -51,8 +56,17 @@ $(document).ready(function(){
 
 //submit text to chat 
 
+    $("#submitmsg").click(function(event) {
+    event.preventDefault();
+      var toAdd = $('#usermsg').val();
+      $("#chatbox").text(toAdd);
+      console.log('click');
+    });
+
 
 
 // giphy stuff from last project in a scroll menu to choose from
 
 // gif post into the chatroom
+
+})
