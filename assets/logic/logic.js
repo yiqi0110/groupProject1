@@ -7,14 +7,17 @@ $(document).ready(function () {
 });
 
 
-var config = {
-    apiKey: "AIzaSyCGtI9XNr0J-kA2A7VgdavXQXtoNiN6vcI",
-    authDomain: "project1-8d0be.firebaseapp.com",
-    databaseURL: "https://project1-8d0be.firebaseio.com",
-    projectId: "project1-8d0be",
-    storageBucket: "project1-8d0be.appspot.com",
-    messagingSenderId: "799117703087"
-};
+    var config = {
+        apiKey: "AIzaSyCZsQZfdR545hpdtOie-D5qnXNqkQI_3ck",
+        authDomain: "groupproject1-ed26a.firebaseapp.com",
+        databaseURL: "https://groupproject1-ed26a.firebaseio.com",
+        projectId: "groupproject1-ed26a",
+        storageBucket: "groupproject1-ed26a.appspot.com",
+        messagingSenderId: "264760171748"
+   
+  };
+
+
 firebase.initializeApp(config);
 
 var database = firebase.database();
