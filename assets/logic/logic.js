@@ -1,6 +1,3 @@
-// anything we want to have happen before the page starts
-//===========================================================================
-
 //modal function call for login prompt
 $(document).ready(function () {
     $("#myBtn").click(function () {
@@ -9,24 +6,7 @@ $(document).ready(function () {
     lang();
 });
 
-// variable declarations
-//===========================================================================
 
-var userName = "";
-var password = "";
-
-var email = "";
-
-// translator api stuff
-var selectedLanguage = ""; // should be something like en, jp, etc. for reference look at google translate api
-var translatedLanguage = ""; // same stuff from above
-var translatedText = ""; // any text you want to translate from sl to tl . . .
-var translation = ""; // the translated text
-
-// function declarations
-//===========================================================================
-
-// firebase stuff
 var config = {
     apiKey: "AIzaSyCGtI9XNr0J-kA2A7VgdavXQXtoNiN6vcI",
     authDomain: "project1-8d0be.firebaseapp.com",
@@ -98,12 +78,6 @@ function lang() {
         $("#languageList").append(options);
     };
 };
-
-// api calls
-
-// if no firebase data, prompt profile creation
-
-// post new user info to firebase
 
 // giphy api button stuff  
 var supportedLanguages = [
@@ -561,6 +535,7 @@ for (var i = 0; i < 2; i++) {
 
 
 
+
 // function functionality
 //===========================================================================
 
@@ -585,9 +560,16 @@ $("#text2TranslateInChat").on("sumbit", function () {
 
 // on.click submit to translator as well as submit text to chat
 
+
+//submit text to chat 
+
+
+
+
 // giphy stuff from last project in a scroll menu to choose from
 
 // gif post into the chatroom
+
 
 //language dropdown option
 var langOptions = supportedLanguages;
@@ -598,3 +580,4 @@ $.each(langOptions, function (val, text) {
     );
 });
 // console.log(langOptions);
+
