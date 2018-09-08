@@ -1,4 +1,15 @@
 $(document).ready(function(){
+    $("#submitmsg").click(function(event) {
+    event.preventDefault();
+      var toAdd = $('#usermsg').val();
+      $("#chatbox").text(toAdd);
+      console.log('click');
+    });
+})
+    
+ 
+
+
 
 // anything we want to have happen before the page starts
 //===========================================================================
@@ -56,12 +67,6 @@ $(document).ready(function(){
 
 //submit text to chat 
 
-    $("#submitmsg").click(function(event) {
-    event.preventDefault();
-      var toAdd = $('#usermsg').val();
-      $("#chatbox").text(toAdd);
-      console.log('click');
-    });
 
 
 
@@ -69,4 +74,3 @@ $(document).ready(function(){
 
 // gif post into the chatroom
 
-})
