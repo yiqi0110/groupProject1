@@ -1,3 +1,18 @@
+$(document).ready(function(){
+    $("#submitmsg").click(function(event) {
+    event.preventDefault();
+      var toAdd = $('#usermsg').val();
+      $("#chatbox").append(toAdd + "<br>");
+      console.log('click');
+      $("#usermsg").val('');
+    });
+})
+    
+ 
+
+
+// anything we want to have happen before the page starts
+//===========================================================================
 //modal function call for login prompt
 $(document).ready(function () {
     $("#myBtn").click(function () {
@@ -8,16 +23,16 @@ $(document).ready(function () {
 
 
 var config = {
-    apiKey: "AIzaSyCGtI9XNr0J-kA2A7VgdavXQXtoNiN6vcI",
-    authDomain: "project1-8d0be.firebaseapp.com",
-    databaseURL: "https://project1-8d0be.firebaseio.com",
-    projectId: "project1-8d0be",
-    storageBucket: "project1-8d0be.appspot.com",
-    messagingSenderId: "799117703087"
-};
-firebase.initializeApp(config);
+    apiKey: "AIzaSyAxWs3yj1ORRLRvP_PJ3IEyxeBmtmFzDi4",
+    authDomain: "lexicon-45765.firebaseapp.com",
+    databaseURL: "https://lexicon-45765.firebaseio.com",
+    projectId: "lexicon-45765",
+    storageBucket: "lexicon-45765.appspot.com",
+    messagingSenderId: "557081841866"
+  };
+  firebase.initializeApp(config);
 
-var database = firebase.database();
+  database = firebase.database;
 
 database.ref().on("value", function (snapshot) {
     if (snapshot.child("userName").exists() && snapshot.child("password").exists()) {
@@ -562,7 +577,6 @@ $("#text2TranslateInChat").on("sumbit", function () {
 
 
 //submit text to chat 
-
 
 
 
