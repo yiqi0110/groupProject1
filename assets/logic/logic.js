@@ -1,20 +1,14 @@
-$(document).ready(function(){
-    $("#submitmsg").click(function(event) {
-    event.preventDefault();
-      var toAdd = $('#usermsg').val();
-      $("#chatbox").append(toAdd + "<br>");
-      console.log('click');
-      $("#usermsg").val('');
-    });
-})
-    
- 
-
-
 // anything we want to have happen before the page starts
 //===========================================================================
 //modal function call for login prompt
 $(document).ready(function () {
+    $("#submitmsg").click(function (event) {
+        event.preventDefault();
+        var toAdd = $('#usermsg').val();
+        $("#chatbox").append(toAdd + "<br>");
+        console.log('click');
+        $("#usermsg").val('');
+    });
     $("#myBtn").click(function () {
         $("#myModal").modal();
     });
@@ -23,80 +17,18 @@ $(document).ready(function () {
 
 
 var config = {
-    apiKey: "AIzaSyAxWs3yj1ORRLRvP_PJ3IEyxeBmtmFzDi4",
+    apiKey:"AIzaSyAxWs3yj1ORRLRvP_PJ3IEyxeBmtmFzDi4",
     authDomain: "lexicon-45765.firebaseapp.com",
-    databaseURL: "https://lexicon-45765.firebaseio.com",
+    databaseURL:"https://lexicon-45765.firebaseio.com",
     projectId: "lexicon-45765",
     storageBucket: "lexicon-45765.appspot.com",
     messagingSenderId: "557081841866"
-  };
-  firebase.initializeApp(config);
-
-  database = firebase.database;
-
-database.ref().on("value", function (snapshot) {
-    if (snapshot.child("userName").exists() && snapshot.child("password").exists()) {
-        // Pull the variables equal to the stored values if they exist
-        // Set the variables for userName and language equal to the stored values if they exist
-        userName = snapshot.val().userName;
-        language = snapshot.val().language;
-    } else {
-
-        $("#create-profile").click(function () {
-            //grab info from modal input boxes
-            userName = $("#userName").val().trim;
-            password = $("#password").val().trim;
-            language = $("#language").val().trim;
-            email = $("#email").val().trim;
-
-            //set info to database
-            // post new user info to firebase
-            database.ref().set({
-                userName: userName,
-                password: password,
-                language: setLanguage,
-                email: email
-            });
-
-            //push new user to database
-            database.ref().push(newUser);
-            //alert that user has been added - another modal?
-        })
-    };
-
-    // giphy api button stuff
-    $("#button-for-giphs").click(function () {
-        var inputsArray = [];
-        var userInput = $("#user-selection").val().trim();
-        inputsArray.push(userInput);
-
-        $.ajax({
-            url: "https://api.giphy.com/v1/gifs/search",
-            APIKey: "4cK7PhqwwNF15DHlSkE0A2ttuyHL6uoX",
-            method: "GET",
-            q: inputsArray,
-            limit: 5
-        }).then(function (data) {
-            // Log the resulting object
-            console.log(data);
-
-            $("#giph-scroll-img").append(data.image);
-
-        });
-    });
-});
-
-function lang() {
-    for (var i = 0; i < supportedLanguages.length; i++) {
-        console.log(supportedLanguages[i].languageNames);
-        var options = $("<option>").text(supportedLanguages[i].languageNames);
-        $("#languageList").append(options);
-    };
 };
+firebase.initializeApp(config);
 
-// giphy api button stuff  
-var supportedLanguages = [
-    {
+var database = firebase.database();
+
+var supportedLanguages = [{
         languageNames: "Afrikaans",
         symbol: "af"
     },
@@ -514,6 +446,70 @@ var supportedLanguages = [
     }
 ];
 
+
+database.ref().on("value", function (snapshot) {
+    if (snapshot.child("userName").exists() && snapshot.child("password").exists()) {
+        // Pull the variables equal to the stored values if they exist
+        // Set the variables for userName and language equal to the stored values if they exist
+        userName = snapshot.val().userName;
+        language = snapshot.val().language;
+    } else {
+
+        $("#create-profile").click(function () {
+            //grab info from modal input boxes
+            userName = $("#userName").val().trim;
+            password = $("#password").val().trim;
+            language = $("#language").val().trim;
+            email = $("#email").val().trim;
+
+            //set info to database
+            // post new user info to firebase
+            database.ref().set({
+                userName: userName,
+                password: password,
+                language: setLanguage,
+                email: email
+            });
+
+            //push new user to database
+            database.ref().push(newUser);
+            //alert that user has been added - another modal?
+        })
+    };
+
+
+    // giphy api button stuff
+    $("#button-for-giphs").click(function () {
+        var inputsArray = [];
+        var userInput = $("#user-selection").val().trim();
+        inputsArray.push(userInput);
+
+        $.ajax({
+            url: "https://api.giphy.com/v1/gifs/search",
+            APIKey: "4cK7PhqwwNF15DHlSkE0A2ttuyHL6uoX",
+            method: "GET",
+            q: inputsArray,
+            limit: 5
+        }).then(function (data) {
+            // Log the resulting object
+            console.log(data);
+
+            $("#giph-scroll-img").append(data.image);
+
+        });
+    });
+});
+
+function lang() {
+    for (var i = 0; i < supportedLanguages.length; i++) {
+        console.log(supportedLanguages[i].languageNames);
+        var options = $("<option>").text(supportedLanguages[i].languageNames);
+        $("#languageList").append(options);
+    };
+};
+
+// giphy api button stuff  
+
 // console.log(supportedLanguages.length);
 
 var newTranslation;
@@ -526,26 +522,26 @@ for (var i = 0; i < 2; i++) {
     var translateURL = "https://translate.googleapis.com/translate_a/single?client=gtx&sl=" + selectedLanguage + "&tl=" + translatedLanguage + "&dt=t&q=" + translatedText;
 
 
-                // (function (i) {
+    // (function (i) {
 
-                //     $.ajax({
-                //         url: translateURL,
-                //         method: "POST"
-                //     }).then(function (response) {
-                //         newTranslation = response[0][0][0];
-                //         translatedName.push(newTranslation);
-                //         console.log(translatedName);
-                //         console.log(i);
+    //     $.ajax({
+    //         url: translateURL,
+    //         method: "POST"
+    //     }).then(function (response) {
+    //         newTranslation = response[0][0][0];
+    //         translatedName.push(newTranslation);
+    //         console.log(translatedName);
+    //         console.log(i);
 
-                //         // console.log(translator);
-                //         // console.log(response[0][0][0]); // this is the tl response
-                //         // console.log(translator[0][0][1]); // this is the sl response
-                //         // console.log(newTranslation);
-                //         // console.log(translator[0][0][0]);
-                //         // for use of adding the language name into the object supportedLanguages
-                //     });
-                // })(i); // this is the syntax of an anonmous function
-                //          for right now, because of CORS, we will hold of on having the translated languages be in the language selectin
+    //         // console.log(translator);
+    //         // console.log(response[0][0][0]); // this is the tl response
+    //         // console.log(translator[0][0][1]); // this is the sl response
+    //         // console.log(newTranslation);
+    //         // console.log(translator[0][0][0]);
+    //         // for use of adding the language name into the object supportedLanguages
+    //     });
+    // })(i); // this is the syntax of an anonmous function
+    //          for right now, because of CORS, we will hold of on having the translated languages be in the language selectin
 };
 
 
@@ -594,4 +590,3 @@ $.each(langOptions, function (val, text) {
     );
 });
 // console.log(langOptions);
-
