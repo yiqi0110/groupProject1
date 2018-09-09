@@ -1,3 +1,4 @@
+
 // anything we want to have happen before the page starts
 //===========================================================================
 //modal function call for login prompt
@@ -17,13 +18,14 @@ $(document).ready(function () {
 
 
 var config = {
-    apiKey:"AIzaSyAxWs3yj1ORRLRvP_PJ3IEyxeBmtmFzDi4",
-    authDomain: "lexicon-45765.firebaseapp.com",
-    databaseURL:"https://lexicon-45765.firebaseio.com",
-    projectId: "lexicon-45765",
-    storageBucket: "lexicon-45765.appspot.com",
-    messagingSenderId: "557081841866"
+    apiKey: "AIzaSyCZsQZfdR545hpdtOie-D5qnXNqkQI_3ck",
+    authDomain: "groupproject1-ed26a.firebaseapp.com",
+    databaseURL: "https://groupproject1-ed26a.firebaseio.com",
+    projectId: "groupproject1-ed26a",
+    storageBucket: "groupproject1-ed26a.appspot.com",
+    messagingSenderId: "264760171748"
 };
+
 firebase.initializeApp(config);
 
 var database = firebase.database();
@@ -589,4 +591,4 @@ $.each(langOptions, function (val, text) {
         $('<option></option>').val(val).html(text)
     );
 });
-// console.log(langOptions);
+
