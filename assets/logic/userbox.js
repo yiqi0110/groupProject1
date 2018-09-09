@@ -10,16 +10,17 @@ var password="";
 $("#SignUp").on("click", function(e) {
     e.preventDefault();
     //grab info from modal input boxes
-    console.log("Hello!");
+    console.log("#SignUp");
 
     //set info to database
     // post new user info to firebase
-    userName = $("#userName").val().trim();
-    emailAddress = $("#emailAddress").val().trim();
-    confirmPassword = $("#confirmPassword").val().trim();
-    password = $("#password").val().trim();
+    userName = $("#userName").val();
+    emailAddress = $("#emailAddress").val();
+    confirmPassword = $("#confirmPassword").val();
+    password = $("#password").val();
 
-    console.log("Hello!");
+    console.log("User Name: ");
+    console.log(userName);
 
 
     database.ref().set({
@@ -29,12 +30,12 @@ $("#SignUp").on("click", function(e) {
         emailAddress: emailAddress
     },function(error){
         if (error) { 
-            console.log("error");
+            console.log("error wrutung to databse");
 
         }
 
         else { 
-            console.log("success");
+            console.log("success writing to database");
         }
     });
     //push new user to database
@@ -43,6 +44,9 @@ $("#SignUp").on("click", function(e) {
 })
 
 database.ref().on("value", function (snapshot) {
+
+    console.log("Get Started Button Clicked")
+
     console.log(snapshot.val());
     console.log(snapshot.val().userName);
     console.log(snapshot.val().password);
@@ -55,7 +59,7 @@ database.ref().on("value", function (snapshot) {
     //$(".row.userBox").text(snapshot.val().confirmPassword);
 });
 
-    console.log("fired");
+console.log("End of UserBox Code");
 
 
     
