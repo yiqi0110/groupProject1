@@ -1,23 +1,3 @@
-$( document ).ready(function() {
-    console.log("ready!");
-});
-
-
-var config = {
-    apiKey: "AIzaSyCZsQZfdR545hpdtOie-D5qnXNqkQI_3ck",
-    authDomain: "groupproject1-ed26a.firebaseapp.com",
-    databaseURL: "https://groupproject1-ed26a.firebaseio.com",
-    projectId: "groupproject1-ed26a",
-    storageBucket: "groupproject1-ed26a.appspot.com",
-    messagingSenderId: "264760171748"
-};
-
-
-
-firebase.initializeApp(config);
-
-var database = firebase.database();
-
 console.log(database);
 
 var userName =""; 
@@ -69,7 +49,7 @@ database.ref().on("value", function (snapshot) {
     console.log(snapshot.val().confirmPassword);
     console.log(snapshot.val().emailAddress);
 
-    $(".row.userBox").text(snapshot.val().userName + '/\n/' + snapshot.val().password);
+    $(".row.userBox").text(snapshot.val().userName + '\n' + snapshot.val().emailAddress);
     //$(".row.userBox").text(snapshot.val().password);
     //$(".row.userBox").text(snapshot.val().emailAddress);
     //$(".row.userBox").text(snapshot.val().confirmPassword);

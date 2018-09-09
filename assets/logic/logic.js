@@ -1,4 +1,3 @@
-
 // anything we want to have happen before the page starts
 //===========================================================================
 //modal function call for login prompt
@@ -25,7 +24,6 @@ var config = {
     storageBucket: "groupproject1-ed26a.appspot.com",
     messagingSenderId: "264760171748"
 };
-
 firebase.initializeApp(config);
 
 var database = firebase.database();
@@ -591,4 +589,4 @@ $.each(langOptions, function (val, text) {
         $('<option></option>').val(val).html(text)
     );
 });
-
+// console.log(langOptions);
