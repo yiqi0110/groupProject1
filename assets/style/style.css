@@ -5,8 +5,7 @@ h2 {
 
 
 
-<<<<<<< HEAD
-=======
+
 footer {
     text-align: center;
 }
@@ -40,7 +39,7 @@ footer {
 
 }
 
->>>>>>> master
+
 footer {
     text-align: center;
   
@@ -61,13 +60,10 @@ footer {
 
 
 #chatroom { 
-    height:500px;
-    border:1px solid #ccc;
     font:16px/26px;
     overflow:auto;
     background-color: #efefef; 
-    padding: 10px;
-    margin-bottom: 2rem;
+   
     
 
 }
@@ -97,11 +93,14 @@ footer {
 
 .userBox {
     background-color:#efefef; 
-    border-bottom-color: white;
-    color: white;
+    border-bottom-color: black;
+    color: black;
     height: 100px;
-    left: 15px; 
-    width: 100%
+    width: 100%;
+    padding: 20px; 
+    margin: 0px; 
+
+   
   
 }
 
@@ -109,10 +108,8 @@ footer {
 #userHeader {
     background-color:#1b9dd0;
     color: white;
-    left: 15px; 
-    padding: 20px;
     text-align: center;
-    width: 85%
+    width: 100%
   
 }
 /* chatbox css */
@@ -215,6 +212,7 @@ padding: 0px 0px 50px 0px
     padding: 20px;
     margin: 0 0 0 0;
     margin-bottom: 20px; 
+    align: center; 
   
 }
 
