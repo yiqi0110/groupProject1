@@ -610,3 +610,27 @@ $.each(langOptions, function (val, text) {
     );
 });
 
+//Profile page code, still testing//
+//     // var newPhoto = {file: ""}
+//     var name = ""
+//     var profileEmail = email.val().trim();
+//     var defaultLang = []
+//     var userLocation = []
+//     var profileText = $("#profileText");
+//    // var lastLogin = place time code here
+
+//    if (document.onclick($("#save"))) {
+//        // $("#profilePhoto").html("<img src=" + newPhoto + "id='profilePhoto'>")
+//        $("#username").text(name);
+//        $("#emailAddress").text(profileEmail);
+//         $("#languageSelect").text(defaultLang);
+//         $("#countrySelect").text(userLocation);
+//    //     $("#lastLogin").text(lastLogin);
+//        $("#pText").text(profileText);
+//     }
+
+//    //function (getprofilepic) {
+//        //get the file name of newPhoto
+//        //put the name into a string
+       
+   //}
