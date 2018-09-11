@@ -1,3 +1,4 @@
+
 // anything we want to have happen before the page starts
 //===========================================================================
 //modal function call for login prompt
@@ -6,7 +7,7 @@ $(document).ready(function () {
         event.preventDefault();
         var toAdd = $('#usermsg').val();
         $("#chatbox").append(toAdd + "<br>");
-        console.log('click');
+        console.log('Chat Box Clicked');
         $("#usermsg").val('');
     });
     $("#myBtn").click(function () {
@@ -17,13 +18,14 @@ $(document).ready(function () {
 
 
 var config = {
-    apiKey:"AIzaSyAxWs3yj1ORRLRvP_PJ3IEyxeBmtmFzDi4",
-    authDomain: "lexicon-45765.firebaseapp.com",
-    databaseURL:"https://lexicon-45765.firebaseio.com",
-    projectId: "lexicon-45765",
-    storageBucket: "lexicon-45765.appspot.com",
-    messagingSenderId: "557081841866"
+    apiKey: "AIzaSyCZsQZfdR545hpdtOie-D5qnXNqkQI_3ck",
+    authDomain: "groupproject1-ed26a.firebaseapp.com",
+    databaseURL: "https://groupproject1-ed26a.firebaseio.com",
+    projectId: "groupproject1-ed26a",
+    storageBucket: "groupproject1-ed26a.appspot.com",
+    messagingSenderId: "264760171748"
 };
+
 firebase.initializeApp(config);
 
 var database = firebase.database();
@@ -453,9 +455,21 @@ database.ref().on("value", function (snapshot) {
         // Set the variables for userName and language equal to the stored values if they exist
         userName = snapshot.val().userName;
         language = snapshot.val().language;
+
+        console.log("userName and password stored");
     } else {
 
+
+        console.log("userName and password NOT stored");
+        console.log("userName exists is: ");
+        console.log(snapshot.child("userName").exists());
+        console.log("password exists is: ");
+        console.log(snapshot.child("password").exists());
+
+
         $("#create-profile").click(function () {
+
+            console.log("Creating Profile as one was not found");
             //grab info from modal input boxes
             userName = $("#userName").val().trim;
             password = $("#password").val().trim;
@@ -473,6 +487,8 @@ database.ref().on("value", function (snapshot) {
 
             //push new user to database
             database.ref().push(newUser);
+
+            console.log("added new user to database");
             //alert that user has been added - another modal?
         })
     };
@@ -480,6 +496,9 @@ database.ref().on("value", function (snapshot) {
 
     // giphy api button stuff
     $("#button-for-giphs").click(function () {
+
+        console.log("button GIF");
+
         var inputsArray = [];
         var userInput = $("#user-selection").val().trim();
         inputsArray.push(userInput);
@@ -492,7 +511,7 @@ database.ref().on("value", function (snapshot) {
             limit: 5
         }).then(function (data) {
             // Log the resulting object
-            console.log(data);
+            //console.log(data);
 
             $("#giph-scroll-img").append(data.image);
 
@@ -501,8 +520,9 @@ database.ref().on("value", function (snapshot) {
 });
 
 function lang() {
+    console.log("Languages Added");
     for (var i = 0; i < supportedLanguages.length; i++) {
-        console.log(supportedLanguages[i].languageNames);
+        //console.log(supportedLanguages[i].languageNames);
         var options = $("<option>").text(supportedLanguages[i].languageNames);
         $("#languageList").append(options);
     };
@@ -589,4 +609,4 @@ $.each(langOptions, function (val, text) {
         $('<option></option>').val(val).html(text)
     );
 });
-// console.log(langOptions);
+
