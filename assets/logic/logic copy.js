@@ -1,5 +1,14 @@
+// anything we want to have happen before the page starts
+//===========================================================================
 //modal function call for login prompt
 $(document).ready(function () {
+    $("#submitmsg").click(function (event) {
+        event.preventDefault();
+        var toAdd = $('#usermsg').val();
+        $("#chatbox").append(toAdd + "<br>");
+        console.log('click');
+        $("#usermsg").val('');
+    });
     $("#myBtn").click(function () {
         $("#myModal").modal();
     });
@@ -7,17 +16,19 @@ $(document).ready(function () {
 });
 
 
-/*set language dropdown menu
-for (var i = 0; i < supportedLanguages.length; i++) {
-        $("#languageSelect").append($("<option>" + supportedLanguages.languageNames + "</option>"));
-}
-*/
-var userName = "";
-var password = "";
-var email = "";
-var selectedLanguage = "";
-var supportedLanguages = [
-    {
+var config = {
+    apiKey:"AIzaSyAxWs3yj1ORRLRvP_PJ3IEyxeBmtmFzDi4",
+    authDomain: "lexicon-45765.firebaseapp.com",
+    databaseURL:"https://lexicon-45765.firebaseio.com",
+    projectId: "lexicon-45765",
+    storageBucket: "lexicon-45765.appspot.com",
+    messagingSenderId: "557081841866"
+};
+firebase.initializeApp(config);
+
+var database = firebase.database();
+
+var supportedLanguages = [{
         languageNames: "Afrikaans",
         symbol: "af"
     },
@@ -434,79 +445,60 @@ var supportedLanguages = [
         symbol: "zu"
     }
 ];
-/* translator api stuff
-var selectedLanguage = ""; // should be something like en, jp, etc. for reference look at google translate api
-var translatedLanguage = ""; // same stuff from above
-var translatedText = ""; // any text you want to translate from sl to tl . . .
-var translation = "";   // the translated text
-*/
-// firebase stuff
-var config = {
-    apiKey: "AIzaSyCGtI9XNr0J-kA2A7VgdavXQXtoNiN6vcI",
-    authDomain: "project1-8d0be.firebaseapp.com",
-    databaseURL: "https://project1-8d0be.firebaseio.com",
-    projectId: "project1-8d0be",
-    storageBucket: "project1-8d0be.appspot.com",
-    messagingSenderId: "799117703087"
-};
-firebase.initializeApp(config);
-var database = firebase.database();
+
+
 database.ref().on("value", function (snapshot) {
     if (snapshot.child("userName").exists() && snapshot.child("password").exists()) {
         // Pull the variables equal to the stored values if they exist
+        // Set the variables for userName and language equal to the stored values if they exist
         userName = snapshot.val().userName;
         language = snapshot.val().language;
-        email = snapshot.val().email;
-        password = snapshot.val().password;
-        //put in info for displaying something like "Welcome user1!" - pull info from firebase
-        //grab id and display in html ($"#").text("Welcome user1!")
-    } else { //when create profile button is clicked, grab user input from boxes
-        if ($("#loginBtn").click(function () {
-                userName = $("#userName").val().trim;
-                password = $("#password").val().trim;
-                email = $("#email").val().trim;
-                language = $("#language").val().trim;
-                //set info to database
-                database.ref().set({
-                    userName: userName,
-                    password: password,
-                    email: email,
-                    language: setLanguage
-                })
-            }));
+    } else {
+
+        $("#create-profile").click(function () {
+            //grab info from modal input boxes
+            userName = $("#userName").val().trim;
+            password = $("#password").val().trim;
+            language = $("#language").val().trim;
+            email = $("#email").val().trim;
+
+            //set info to database
+            // post new user info to firebase
+            database.ref().set({
+                userName: userName,
+                password: password,
+                language: setLanguage,
+                email: email
+            });
+
+            //push new user to database
+            database.ref().push(newUser);
+            //alert that user has been added - another modal?
+        })
     };
+
+
+    // giphy api button stuff
+    $("#button-for-giphs").click(function () {
+        var inputsArray = [];
+        var userInput = $("#user-selection").val().trim();
+        inputsArray.push(userInput);
+
+        $.ajax({
+            url: "https://api.giphy.com/v1/gifs/search",
+            APIKey: "4cK7PhqwwNF15DHlSkE0A2ttuyHL6uoX",
+            method: "GET",
+            q: inputsArray,
+            limit: 5
+        }).then(function (data) {
+            // Log the resulting object
+            console.log(data);
+
+            $("#giph-scroll-img").append(data.image);
+
+        });
+    });
 });
-/*giphy api button stuff
-        $("#button-for-giphs").click(function () {
-            var inputsArray = [];
-            var userInput = $("#user-selection").val().trim();
-            inputsArray.push(userInput);
-            $.ajax({
-                url: "https://api.giphy.com/v1/gifs/search",
-                APIKey: "4cK7PhqwwNF15DHlSkE0A2ttuyHL6uoX",
-                method: "GET",
-                q = inputsArray,
-                limit = 5
-            }).then(function (data) {
-                // Log the resulting object
-                console.log(data);
-                //add data to chat box
-                $("#chatbox").append(data.image);
-            })
-*/
-//user validation plugin
-/*$('#myform').validate({ // initialize the plugin
-    rules: {
-        userName: {
-            required: true,
-            name: true
-        },
-        field2: {
-            required: true,
-            minlength: 5
-        }
-    }
-});*/
 
 function lang() {
     for (var i = 0; i < supportedLanguages.length; i++) {
@@ -515,3 +507,113 @@ function lang() {
         $("#languageList").append(options);
     };
 };
+
+// giphy api button stuff  
+
+// console.log(supportedLanguages.length);
+
+var newTranslation;
+
+// var translatedName = [];
+for (var i = 0; i < 2; i++) {
+    selectedLanguage = 'en';
+    translatedLanguage = supportedLanguages[i].symbol;
+    translatedText = supportedLanguages[i].languageNames;
+    var translateURL = "https://translate.googleapis.com/translate_a/single?client=gtx&sl=" + selectedLanguage + "&tl=" + translatedLanguage + "&dt=t&q=" + translatedText;
+
+
+    // (function (i) {
+
+    //     $.ajax({
+    //         url: translateURL,
+    //         method: "POST"
+    //     }).then(function (response) {
+    //         newTranslation = response[0][0][0];
+    //         translatedName.push(newTranslation);
+    //         console.log(translatedName);
+    //         console.log(i);
+
+    //         // console.log(translator);
+    //         // console.log(response[0][0][0]); // this is the tl response
+    //         // console.log(translator[0][0][1]); // this is the sl response
+    //         // console.log(newTranslation);
+    //         // console.log(translator[0][0][0]);
+    //         // for use of adding the language name into the object supportedLanguages
+    //     });
+    // })(i); // this is the syntax of an anonmous function
+    //          for right now, because of CORS, we will hold of on having the translated languages be in the language selectin
+};
+
+
+
+
+// function functionality
+//===========================================================================
+
+
+// Any input that is put into the chat box will be sent as the users language and the translated to the other users language
+$("#text2TranslateInChat").on("sumbit", function () {
+    // takes set language from user
+    selectedLanguage = '#';
+    // takes language to be translate to
+    translatedLanguage = '#';
+    // takes the text 2 be translated
+    translatedText = '#';
+}); // end of input retrieval
+
+// sign in or create profile or anonymous profile
+
+// sign in ==> input username and password
+
+// create profile ==> set username and password, and set language
+
+// anonymous ==> set language
+
+// on.click submit to translator as well as submit text to chat
+
+
+//submit text to chat 
+
+
+
+// giphy stuff from last project in a scroll menu to choose from
+
+// gif post into the chatroom
+
+
+//language dropdown option
+var langOptions = supportedLanguages;
+var mySelect = $('#langSelect');
+$.each(langOptions, function (val, text) {
+    mySelect.append(
+        $('<option></option>').val(val).html(text)
+    );
+});
+// console.log(langOptions);
+
+// console.log(langOptions);
+
+//Profile page code//
+    // var newPhoto = {file: ""}
+     var name = ""
+     var profileEmail = email.val().trim();
+     var defaultLang = []
+     var userLocation = []
+     var profileText = $("#profileText");
+    // var lastLogin = place time code here
+
+    if (document.onclick($("#save"))) {
+        // $("#profilePhoto").html("<img src=" + newPhoto + "id='profilePhoto'>")
+        $("#username").text(name);
+        $("#emailAddress").text(profileEmail);
+         $("#languageSelect").text(defaultLang);
+         $("#countrySelect").text(userLocation);
+    //     $("#lastLogin").text(lastLogin);
+        $("#pText").text(profileText);
+     }
+
+    //function (getprofilepic) {
+        //get the file name of newPhoto
+        //put the name into a string
+        
+    //}
