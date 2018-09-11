@@ -7,6 +7,7 @@ h2 {
 
 footer {
     text-align: center;
+    color: slategray;
 }
 
 
@@ -203,8 +204,8 @@ padding: 0px 0px 50px 0px
 
     background-color: #efefef;
     padding: 20px;
-    margin: 0 0 0 0;
     margin-bottom: 20px; 
+    border: 1px solid #ccc;;
   
 }
 
@@ -221,21 +222,29 @@ padding: 0px 0px 50px 0px
     padding: 10px;
     background: #1b9dd0;
     text-align: center;
+    color: white;
 }
 #profileInfo.img {
     align-content: center;
+    
 }
 
 #profileDetails {
     margin: 10px;
     padding: 20px;
-    border:1px solid #ACD8F0;
+    background-color: #efefef;
+    border:1px solid #ccc;
+}
+
+#profilePhoto {
+    border-radius: 10px;
 }
 
 #usersChattedWith {
     margin: 10px;
     padding: 10px;
-    border:1px solid #1b9dd0;
+    background-color: #efefef;
+    border:1px solid #ccc;
     text-align: center;
 }
 #logIn {
@@ -389,13 +398,15 @@ padding: 0px 0px 50px 0px
 #yourFriends {
     margin: 10px;
     padding: 10px;
-    border:1px solid #1b9dd0;
+    background-color: #efefef;
+    border:1px solid #ccc;
     text-align: center;
 }
 
 h5 {
     background: #ACD8F0;
     text-align: center;
+    border-radius: 10px;
 }
 
 .userBox {
@@ -410,4 +421,23 @@ h5 {
 .card-body {
    
     padding: 0;
+}
+div, .jumbotron {
+    border-radius: 10px;
+}
+
+.userBox {
+    margin: -25px 0 0 0;
+    padding: 10px;
+    width: 100%;
+    border: 1px solid #ccc;
+}
+
+#chatUsers {
+    margin: 0 -30px 0 0;
+    padding: 0 0 0 0;
+}
+
+h4 {
+    color: white;
 }
