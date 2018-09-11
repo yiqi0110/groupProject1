@@ -450,72 +450,81 @@ var supportedLanguages = [{
 
 
 database.ref().on("value", function (snapshot) {
-    if (snapshot.child("userName").exists() && snapshot.child("password").exists()) {
+    if (snapshot.child("username").exists() && snapshot.child("password").exists()) {
         // Pull the variables equal to the stored values if they exist
-        // Set the variables for userName and language equal to the stored values if they exist
-        userName = snapshot.val().userName;
+        // Set the variables for username and language equal to the stored values if they exist
+        username = snapshot.val().username;
         language = snapshot.val().language;
 
-        console.log("userName and password stored");
+        console.log("username and password stored");
     } else {
 
 
-        console.log("userName and password NOT stored");
-        console.log("userName exists is: ");
-        console.log(snapshot.child("userName").exists());
+        console.log("username and password NOT stored");
+        console.log("username exists is: ");
+        console.log(snapshot.child("username").exists());
         console.log("password exists is: ");
         console.log(snapshot.child("password").exists());
 
+    }
+});
 
-        $("#create-profile").click(function () {
 
-            console.log("Creating Profile as one was not found");
-            //grab info from modal input boxes
-            userName = $("#userName").val().trim;
-            password = $("#password").val().trim;
-            language = $("#language").val().trim;
-            email = $("#email").val().trim;
+$("#SignUpButton").on("click", function(e) {
+    e.preventDefault();
 
-            //set info to database
-            // post new user info to firebase
-            database.ref().set({
-                userName: userName,
-                password: password,
-                language: setLanguage,
-                email: email
-            });
+    console.log("Creating Profile as one was not found");
+    //grab info from modal input boxes
+    var username = $("#username").val();
+    var password = $("#password").val();
+    var email = $("#emailAddress").val();
+    var location = $("#selectLocation").val();
 
-            //push new user to database
-            database.ref().push(newUser);
-
-            console.log("added new user to database");
-            //alert that user has been added - another modal?
-        })
+    //set info to database
+    // post new user info to firebase
+    var newUser ={
+        username: username,
+        password: password,
+        location: selectLocation,
+        email: email
     };
 
+    //push new user to database
+    database.ref().push(newUser);
 
-    // giphy api button stuff
-    $("#button-for-giphs").click(function () {
+    console.log("added new user to database");
+    //alert that user has been added - another modal?
 
-        console.log("button GIF");
+    $("#username").val("");
+    $("#password").val("");
+    $("#emailAddress").val("");
+    $("#se").val("");
 
-        var inputsArray = [];
-        var userInput = $("#user-selection").val().trim();
-        inputsArray.push(userInput);
+});
+    
 
-        $.ajax({
-            url: "https://api.giphy.com/v1/gifs/search",
-            APIKey: "4cK7PhqwwNF15DHlSkE0A2ttuyHL6uoX",
-            method: "GET",
-            q: inputsArray,
-            limit: 5
-        }).then(function (data) {
-            // Log the resulting object
-            //console.log(data);
 
-            $("#giph-scroll-img").append(data.image);
+// giphy api button stuff
+$("#button-for-giphs").click(function () {
 
-        });
+    console.log("button GIF");
+
+    var inputsArray = [];
+    var userInput = $("#user-selection").val().trim();
+    inputsArray.push(userInput);
+
+    $.ajax({
+        url: "https://api.giphy.com/v1/gifs/search",
+        APIKey: "4cK7PhqwwNF15DHlSkE0A2ttuyHL6uoX",
+        method: "GET",
+        q: inputsArray,
+        limit: 5
+    }).then(function (data) {
+        // Log the resulting object
+        //console.log(data);
+
+        $("#giph-scroll-img").append(data.image);
+
     });
 });
 
