@@ -1,28 +1,32 @@
 // anything we want to have happen before the page starts
 //===========================================================================
 //modal function call for login prompt
+var selectedLanguage;
 $(document).ready(function () {
     lang();
-    var selectedLanguage;
     $("#languageList").change(function () {
         selectedLanguage = $(this).val();
         console.log(selectedLanguage);
     });
+
+    // allows the send button to submit the input
     $("#submitmsg").click(function (event) {
         event.preventDefault();
-        var toAdd = $('#usermsg').val();
-        console.log('Chat Box Clicked');
-        $("#usermsg").val('');
-        // here youd need to be reading your language that is selected and the language of the user that just sent the message to the chat group as well as there text itself
-        trans(selectedLanguage, 'en', toAdd)
-            .then(newTranslation => {
-                console.log(newTranslation); // this comes back with the translation
-                $("#chatbox").prepend(toAdd + "<br>");
-                // anything needing a translation must be sent through here, latency
-
-            })
-            .catch(error => console.error(error));
+        submitMSG();
     });
+
+    // allows enter to submit the text from the input
+    $("#usermsg").keypress(function(event){
+        // event.preventDefault();
+        if (event.which == 13){
+        submitMSG();
+        };
+    });
+    
+    // this stops the page from refreshing on enter key press
+    $("form#msg").submit(function(e){
+        e.preventDefault();
+    })
 
     $("#myBtn").click(function () {
         $("#myModal").modal();
@@ -616,10 +620,28 @@ database.ref().on("value", function (snapshot) {
 
 });
 
-// giphy api button stuff
-$("#button-for-giphs").click(function () {
-
-    console.log("button GIF");
+// stuff for submit of text into chat
+function submitMSG(){
+    console.log(selectedLanguage);
+    var toAdd = $('#usermsg').val();
+    console.log('Chat Box Clicked');
+$("#usermsg").val('');
+// here youd need to be reading your language that is selected and the language of the user that just sent the message to the chat group as well as there text itself
+trans(selectedLanguage, 'en'/* this value should be the language that other user have seleceted */, toAdd /* this value should be the last thing(child) input to the chat in the data base*/)
+.then(newTranslation => {
+    console.log(newTranslation); // this comes back with the translation
+        $("#chatbox").prepend(newTranslation + "<br>");
+        // anything needing a translation must be sent through here, latency
+        
+    })
+    .catch(error => console.error(error));
+};
+    
+    
+    // giphy api button stuff
+    $("#button-for-giphs").click(function () {
+        
+        console.log("button GIF");
 
     var inputsArray = [];
     var userInput = $("#user-selection").val().trim();
@@ -662,7 +684,6 @@ function trans(selectedLanguage, translatedLanguage, translatedText, i) {
         }).then(function (response) {
             console.log(response);
             var newTranslation = response[0][0][0];
-            supportedLanguages[i].translation = newTranslation;
             resolve(newTranslation);
         }).catch(function (error) {
             reject(error);
