@@ -148,8 +148,8 @@ a {
     overflow:auto; 
 }
   
-#usermsg {
-    width:395px;
+#textSTUFF {
+    width:95%;
     border:1px solid #ACD8F0; 
 }
   
@@ -321,12 +321,8 @@ a {
     height:270px;
     width:430px;
     border:1px solid #ACD8F0;
-    overflow:auto; }
-  
-#usermsg {
-    width:395px;
-    border:1px solid #ACD8F0; }
-  
+    overflow-wrap: break-word; }
+
 #submit { width: 60px; }
   
 .error { color: #ff0000; }
