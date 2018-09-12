@@ -2,19 +2,48 @@
 //===========================================================================
 //modal function call for login prompt
 $(document).ready(function () {
+    lang();
     $("#submitmsg").click(function (event) {
         event.preventDefault();
         var toAdd = $('#usermsg').val();
-        $("#chatbox").prepend(toAdd + "<br>");
         console.log('Chat Box Clicked');
         $("#usermsg").val('');
-        var translatedSTUFF = trans('en', 'ja', toAdd);
-        console.log("this is the text from the chatbox: "+ translatedSTUFF);
+        // here youd need to be reading your language that is selected and the language of the user that just sent the message to the chat group as well as there text itself
+
+        // trans('en', 'ja', toAdd)
+        //     .then(newTranslation => {
+        //         console.log(newTranslation); // this comes back with the translation
+        //         $("#chatbox").prepend(toAdd + "<br>");
+
+
+
+
+
+        //     })
+        //     .catch(error => console.error(error));
+        for (var i = 0; i < supportedLanguages.length; i++) {
+            trans('en', supportedLanguages[i].symbol, supportedLanguages[i].languageNames, i)
+                .then(newTranslation => {
+                    console.log(newTranslation); // this comes back with the translation
+                })
+                .catch(error => console.error(error));
+        }
+        console.log(supportedLanguages);
     });
+    
     $("#myBtn").click(function () {
         $("#myModal").modal();
     });
 });
+$("#languageList").change(function () {
+
+    var thing = $(this).val();
+    console.log(thing);
+});
+
+
+
+
 
 
 var config = {
@@ -475,25 +504,36 @@ $("#button-for-giphs").click(function () {
     });
 });
 
-// translation section
-var trans = function (selectedLanguage, translatedLanguage, translatedText) {
-
-    var translateURL = "https://translate.googleapis.com/translate_a/single?client=gtx&sl=" + selectedLanguage + "&tl=" + translatedLanguage + "&dt=t&q=" + translatedText;
-
-    $.ajax({
-        url: translateURL,
-        method: "POST",
-        headers: {
-            'Access-Control-Allow-Origin': '*'      // is maybe a way to work around cors issues
-        }
-    }).then(function (response) {
-        newTranslation = response[0][0][0];
-        translatedName.push(newTranslation);
-        console.log(translatedName);
-        console.log(i);
-
-    });
+function lang() {
+    console.log("Languages Added");
+    for (var i = 0; i < translatedNames.length; i++) {
+        //console.log(supportedLanguages[i].languageNames);
+        var options = $("<option>").text(supportedLanguages[i].languageNames);
+        options.attr("value", supportedLanguages[i].symbol);
+        $("#languageList").append(options);
+    };
 };
+
+// translation section
+function trans(selectedLanguage, translatedLanguage, translatedText, i) {
+    return new Promise((resolve, reject) => {
+        var translateURL = "https://translate.googleapis.com/translate_a/single?client=gtx&sl=" + selectedLanguage + "&tl=" + translatedLanguage + "&dt=t&q=" + translatedText;
+        //  + "&keyId=a3e4f0ff092a26cf340e750f92d988d05f3dacc8";        // maybe useful later
+
+        $.ajax({
+            url: translateURL,
+            method: "POST",
+        }).then(function (response) {
+            console.log(response);
+            var newTranslation = response[0][0][0];
+            supportedLanguages[i].translation = newTranslation;
+            resolve(newTranslation);
+        }).catch(function (error) {
+            reject(error);
+        });
+    })
+};
+
 
 // Any input that is put into the chat box will be sent as the users language and the translated to the other users language
 $("#text2TranslateInChat").on("sumbit", function () {
@@ -504,6 +544,17 @@ $("#text2TranslateInChat").on("sumbit", function () {
     // takes the text 2 be translated
     translatedText = '#';
 }); // end of input retrieval
+
+// for (var i = 0; i < 2; i++) {
+//     trans('en', supportedLanguages[i].symbol, supportedLanguages[i].languageNames)
+//         .then(newTranslation => {
+//             console.log(newTranslation); // this comes back with the translation
+//             supportedLanguages[i].translation = newTranslation;
+//             console.log(supportedLanguages[i]);
+
+//         })
+//         .catch(error => console.error(error));
+// };
 
 
 //Profile page code, still testing//
