@@ -1,158 +1,166 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Lexicon</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-    <link rel="stylesheet" href="assets/style/style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Lexicon</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+    crossorigin="anonymous">
+  <link rel="stylesheet" href="assets/style/style.css">
 </head>
+
 <body>
-    <!--Navbar-->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <a class="navbar-brand" href="#">Lexicon</a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarText">
-        <ul class="navbar-nav mr-auto">
-          <li class="nav-item">
-            <a class="nav-link" href="index.html">Home</a>
-          </li>
-          <li class="nav-item active">
-            <a class="nav-link" href="profile.html">Profile <span class="sr-only">(current)</span></a>
-          </li>
-          </ul>
-        
-        <span class="navbar-nav mr-auto" id="logIn">
-          <a class="nav-link" href="#">Login</a><a class="nav-link" href="#">Sign Up</a>
-        
-        </span>
+  <!--Navbar-->
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">Lexicon</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText"
+      aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarText">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="index.html">Home</a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" href="profile.html">Profile <span class="sr-only">(current)</span></a>
+        </li>
+      </ul>
+
+      <span class="navbar-nav mr-auto" id="logIn">
+        <a class="nav-link" href="#">Login</a><a class="nav-link" href="#">Sign Up</a>
+
+      </span>
+    </div>
+  </nav>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-md-3" id="profileInfo">
+        <h4>Your Profile Info</h4>
+
+        <a href="https://placeholder.com"><img src="https://via.placeholder.com/200x200" id="profilePhoto"></a>
+        <p id="profileName">Name</p>
+        <p id="profileEmail">Email</p>
+        <p id="selectLanguage">Default Language</p>
+        <p id="selectLocation">Location</p>
+        <p id="pText">Profile Text Blurb</p>
+        <p id="lastLogin">Last Login:</p>
+
+
       </div>
-    </nav> 
+      <div class="col-md-7" id="profileDetails">
 
-   <div class="container">
-        <div class="row">
-          <div class="col-md-3" id="profileInfo">
-            <h4>Your Profile Info</h4>
-             
-              <a href="https://placeholder.com"><img src="https://via.placeholder.com/200x200" id="profilePhoto"></a>
-              <p id="profileName">Name</p>
-              <p id="profileEmail">Email</p>
-              <p id="selectLanguage">Default Language</p>
-              <p id="selectLocation">Location</p>
-              <p id="pText">Profile Text Blurb</p>
-              <p id="lastLogin">Last Login:</p>
-
-        
+        <form>
+          <div class="form-group">
+            <label for="exampleFormControlInput1">Username</label>
+            <input type="text" class="form-control" id="username" placeholder="name">
           </div>
-          <div class="col-md-7" id="profileDetails">
-        
-              <form>
-                    <div class="form-group">
-                      <label for="exampleFormControlInput1">Username</label>
-                      <input type="text" class="form-control" id="username" placeholder="name">
-                    </div>
-                    <div class="form-group">
-                            <label for="exampleFormControlInput1">Current Password</label>
-                            <input type="password" readonly class="form-control-plaintext" id="staticPassword" value="password">
-                    
-                          </div>
-                    <div class="form-group">
-                            <label for="exampleFormControlInput1">New Password</label>
-                            <input type="password" class="form-control" id="password" placeholder="">
-                          </div>
-                          <div class="form-group">
-                                <label for="exampleFormControlInput1">Confirm Password</label>
-                                <input type="password" class="form-control" id="confirmPassword" placeholder="">
-                              </div>
-                    <div class="form-group">
-                            <label for="exampleFormControlInput1">Email address</label>
-                            <input type="email" readonly class="form-control-plaintext" id="emailAddress" placeholder="name@example.com">
-                          </div>
+          <div class="form-group">
+            <label for="exampleFormControlInput1">Current Password</label>
+            <input type="password" readonly class="form-control-plaintext" id="staticPassword" value="password">
 
-                          <div class="form-group">
-                                <label for="exampleFormControlSelect1">Country Select:</label>
-                                <select class="form-control" id="countrySelect">
-                                  <option>1</option>
-                                  <option>2</option>
-                                  <option>3</option>
-                                  <option>4</option>
-                                  <option>5</option>
-                                </select>
-                              </div>
-
-                              <div class="form-group">
-                                    <label for="exampleFormControlSelect1">Default Language:</label>
-                                    <select class="form-control" id="languageList"></select>
-                                    </select>
-                                  </div>
-                    
-                    <div class="form-group">
-                      <label for="exampleFormControlTextarea1">Profile text (Limited to a certain amount of characters)</label>
-                      <textarea class="form-control" id="profileText" rows="3" placeholder="My name is Jerry and I love cheetos!"></textarea>
-                    </div>
-                  </form>
-                  <form>
-                      Upload New Profile Photo:
-                        <div class="form-group">
-                
-                          <input type="file" class="form-control-file" id="uploadPhoto">
-                        </div>
-                      </form>
-
-                      <button id="save">Save Changes</button>
           </div>
-    
-        </div>
+          <div class="form-group">
+            <label for="exampleFormControlInput1">New Password</label>
+            <input type="password" class="form-control" id="password" placeholder="">
+          </div>
+          <div class="form-group">
+            <label for="exampleFormControlInput1">Confirm Password</label>
+            <input type="password" class="form-control" id="confirmPassword" placeholder="">
+          </div>
+          <div class="form-group">
+            <label for="exampleFormControlInput1">Email address</label>
+            <input type="email" readonly class="form-control-plaintext" id="emailAddress" placeholder="name@example.com">
+          </div>
+
+          <div class="form-group">
+            <label for="exampleFormControlSelect1">Country Select:</label>
+            <select class="form-control" id="countrySelect">
+              <option>1</option>
+              <option>2</option>
+              <option>3</option>
+              <option>4</option>
+              <option>5</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="exampleFormControlSelect1">Default Language:</label>
+            <select class="form-control" id="languageList"></select>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="exampleFormControlTextarea1">Profile text (Limited to a certain amount of characters)</label>
+            <textarea class="form-control" id="profileText" rows="3" placeholder="My name is Jerry and I love cheetos!"></textarea>
+          </div>
+        </form>
+        <form>
+          Upload New Profile Photo:
+          <div class="form-group">
+
+            <input type="file" class="form-control-file" id="uploadPhoto">
+          </div>
+        </form>
+
+        <button id="save">Save Changes</button>
       </div>
 
-      <div class="container">
-            <div class="row">
-            
-    
-              <div class="col" id="usersChattedWith">
-          <h5>Users You Have Chatted With:</h5>
-                <p>user1</p>
-                <p>user2</p>
-                <p>user3</p>
-                <p>user4</p>
-                <p>user5</p>
-                </div>
-                <div class="col" id="yourFriends">
-                        <h5>Your Friends:</h5>
-                              <p>user1</p>
-                              <p>user2</p>
-                              <p>user3</p>
-                              <p>user4</p>
-                              <p>user5</p>
-  
-                              
-                    </div>
-            </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="row">
+
+
+      <div class="col" id="usersChattedWith">
+        <h5>Users You Have Chatted With:</h5>
+        <p>user1</p>
+        <p>user2</p>
+        <p>user3</p>
+        <p>user4</p>
+        <p>user5</p>
       </div>
+      <div class="col" id="yourFriends">
+        <h5>Your Friends:</h5>
+        <p>user1</p>
+        <p>user2</p>
+        <p>user3</p>
+        <p>user4</p>
+        <p>user5</p>
+
+
+      </div>
+    </div>
+  </div>
 
 
 
-          <!--Footer-->
-          <div class="card">
-              <div class="card-body">
-                <footer> &copy; Team < s t r o n g / ></footer>
-              </div>
-            </div>
-          
+  <!--Footer-->
+  <div class="card">
+    <div class="card-body">
+      <footer> &copy; Team < s t r o n g />
+      </footer>
+    </div>
+  </div>
 
 
 
 
-        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-        crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
-        crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
-        crossorigin="anonymous"></script>
-    <script src="assets/logic/logic.js"></script>
+
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+    crossorigin="anonymous"></script>
+  <script src="https://www.gstatic.com/firebasejs/5.4.2/firebase.js"></script>
+  <script src="assets/logic/logic.js"></script>
+  <script src="assets/logic/languagesStore.js"></script>
 </body>
+
 </html>
