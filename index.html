@@ -9,6 +9,7 @@
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
     crossorigin="anonymous">
   <link rel="stylesheet" href="assets/style/style.css">
+  <script src="https://www.gstatic.com/firebasejs/5.4.2/firebase.js"></script>
 
 </head>
 
@@ -108,7 +109,7 @@
             </select>
           </div>
           <br>
-          <a class="btn btn-primary" href="#" role="button">Sign me up!</a>
+          <a class="btn btn-primary" href="#" role="button" id="create-profile">Sign me up!</a>
 
         </form>
 
@@ -189,6 +190,14 @@
                     <button class="btn btn-default dropdown-toggle" type="button" name="submitmsg" type="submit" id="submitmsg"
                       aria-haspopup="true" aria-expanded="false">Send</button>
                   </span>
+                  <div class="dropdown">
+                      <button class="btn btn-default dropdown-toggle" type="button" id="gifButtonsView" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Pick Your Gif!
+                      </button>
+                      <div class="dropdown-menu" id="gifsView" aria-labelledby="dropdownMenuButton">
+                          <a class="dropdown-item" id="image"></a>
+                      </div>
+                    </div>
                   <div class="dropdown-menu">
                     <!-- Dropdown menu links -->
                   </div>
