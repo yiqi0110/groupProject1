@@ -21,6 +21,7 @@ $(document).ready(function () {
         if (event.which == 13){
         submitMSG();
         };
+
     });
     
     // this stops the page from refreshing on enter key press
@@ -39,17 +40,18 @@ $(document).ready(function () {
 
 
 var config = {
-    apiKey: "AIzaSyCZsQZfdR545hpdtOie-D5qnXNqkQI_3ck",
-    authDomain: "groupproject1-ed26a.firebaseapp.com",
-    databaseURL: "https://groupproject1-ed26a.firebaseio.com",
-    projectId: "groupproject1-ed26a",
-    storageBucket: "groupproject1-ed26a.appspot.com",
-    messagingSenderId: "264760171748"
+    apiKey: "AIzaSyCGtI9XNr0J-kA2A7VgdavXQXtoNiN6vcI",
+    authDomain: "project1-8d0be.firebaseapp.com",
+    databaseURL: "https://project1-8d0be.firebaseio.com",
+    projectId: "project1-8d0be",
+    storageBucket: "project1-8d0be.appspot.com",
+    messagingSenderId: "799117703087"
 };
 
 firebase.initializeApp(config);
 
 var database = firebase.database();
+
 
 var supportedLanguages = [
     {
@@ -576,49 +578,59 @@ var supportedLanguages = [
 
 
 database.ref().on("value", function (snapshot) {
-    if (snapshot.child("userName").exists() && snapshot.child("password").exists()) {
+    console.log("working");
+    if (snapshot.child("username").exists() && snapshot.child("password").exists()) {
         // Pull the variables equal to the stored values if they exist
         // Set the variables for userName and language equal to the stored values if they exist
         userName = snapshot.val().userName;
         language = snapshot.val().language;
 
-        console.log("userName and password stored");
+        console.log("username and password stored");
     } else {
 
 
-        ("userName and password NOT stored");
-        console.log("userName exists is: ");
-        console.log(snapshot.child("userName").exists());
+        ("username and password NOT stored");
+        console.log("username exists is: ");
+        console.log(snapshot.child("username").exists());
         console.log("password exists is: ");
         console.log(snapshot.child("password").exists());
 
 
-        $("#create-profile").click(function () {
+        $("#create-profile").on("click", function () {
+            function Profile() {
+                console.log("Creating Profile as one was not found");
+                //grab info from modal input boxes
+                userName = $("#username").val().trim;
+                password = $("#password").val().trim;
+                language = $("#language").val().trim;
+                email = $("#emailAddress").val().trim;
 
-            console.log("Creating Profile as one was not found");
-            //grab info from modal input boxes
-            userName = $("#userName").val().trim;
-            password = $("#password").val().trim;
-            language = $("#language").val().trim;
-            email = $("#email").val().trim;
+                //set info to database
+                // post new user info to firebase
+                database.ref().set({
+                    userName: userName,
+                    password: password,
+                    language: setLanguage,
+                    email: email
+                });
 
-            //set info to database
-            // post new user info to firebase
-            database.ref().set({
-                userName: userName,
-                password: password,
-                language: setLanguage,
-                email: email
-            });
+                //push new user to database
+                database.ref().push(newUser);
 
-            //push new user to database
-            database.ref().push(newUser);
-
-            console.log("added new user to database");
-            //alert that user has been added - another modal?
+                console.log("added new user to database");
+                //alert that user has been added - another modal?
+            }
         })
     };
 
+
+    Profile();
+    $(document).on("click", "#create-profile", Profile());
+
+
+
+/* giphy api button stuff
+$("#button-for-giphs").click(function () {
 
 
 // stuff for submit of text into chat
@@ -662,6 +674,65 @@ trans(selectedLanguage, 'en'/* this value should be the language that other user
 
     });
 });
+*/
+// An array of actions, new actions will be pushed into this array;
+$(".dropdown").on("click", function () {
+    var gifs = ["Funny", "Sad", "Happy", "Excited", "Hopeful"];
+
+    // Creating Functions & Methods
+    // Function that displays all gif buttons
+    function displayGifButtons() {
+        $("#gifButtonsView").empty(); // erasing anything in this div id so that it doesnt duplicate the results
+        for (var i = 0; i < gifs.length; i++) {
+            var gifButton = $("<button>");
+            gifButton.addClass("dropdown-item");
+            gifButton.attr("data-name", gifs[i]);
+            gifButton.text(gifs[i]);
+            $("#gifButtonsView").append(gifButton);
+        }
+    }
+
+    // Function that displays all of the gifs
+    function displayGifs() {
+        var action = $(this).attr("data-name");
+        var queryURL = "http://api.giphy.com/v1/gifs/search?q=" + action + "&api_key=4cK7PhqwwNF15DHlSkE0A2ttuyHL6uoX&limit=3";
+        console.log(queryURL); // displays the constructed url
+        $.ajax({
+            url: queryURL,
+            method: 'GET'
+        })
+            .done(function (response) {
+                console.log(response); // console test to make sure something returns
+                $("#submitmsg").empty(); // erasing anything in this div id so that it doesnt keep any from the previous click
+                var results = response.data; //shows results of gifs
+                if (results == "") {
+                    alert("There isn't a gif for this selected button");
+                }
+                for (var i = 0; i < results.length; i++) {
+
+                    var gifDiv = $("<div>"); //div for the gifs to go inside
+                    gifDiv.addClass("gifDiv");
+                    // pulling gif
+                    var gifImage = $("<img>");       
+                    gifImage.attr("data-animate", results[i].images.fixed_height_small.url); // animated image
+                    gifImage.attr("data-state", "animate"); // set the image state
+                    gifImage.addClass("image");
+                    gifDiv.append(gifImage);
+                    // pulling still image of gif
+                    // adding div of gifs to gifsView div
+                    $("#submitmsg").prepend(gifDiv);
+                }
+            });
+    }
+    // Calling Functions & Methods
+    displayGifButtons(); // displays list of actions already created
+    displayGifs();
+
+    // Document Event Listeners
+    $(document).on("click", ".dropdown", displayGifs);
+});
+var newTranslation = '';
+
 
 function lang() {
     console.log("Languages Added");
@@ -672,6 +743,7 @@ function lang() {
         $("#languageList").append(options);
     };
 };
+
 
 // translation section
 function trans(selectedLanguage, translatedLanguage, translatedText, i) {
@@ -818,3 +890,4 @@ $("#SignUpButton").on("click", function(e) {
 
 });
     
+
