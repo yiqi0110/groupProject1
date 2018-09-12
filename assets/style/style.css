@@ -69,7 +69,15 @@ footer {
 #logIn {
     float: right;
     text-align: right;
-    margin: 0 0 0 700px;
+    margin: 8px 0 0 700px;
+    padding: 0 0 0 0;
+}
+
+#logOut {
+    position: static;
+    float: right;
+    text-align: right;
+    margin: 8px 0 0 700px;
     padding: 0 0 0 0;
 }
 
@@ -247,12 +255,7 @@ padding: 0px 0px 50px 0px
     border:1px solid #ccc;
     text-align: center;
 }
-#logIn {
-    float: right;
-    text-align: right;
-    margin: 0 0 0 700px;
-    padding: 0 0 0 0;
-}
+
 
 #chatHeader {
     background-color:#1b9dd0;
@@ -441,3 +444,4 @@ div, .jumbotron {
 h4 {
     color: white;
 }
+

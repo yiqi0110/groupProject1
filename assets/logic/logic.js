@@ -634,3 +634,27 @@ $.each(langOptions, function (val, text) {
 //        //put the name into a string
        
    //}
+
+   // Log-In and Log Out toggle
+//    ($("#logIn")).click(function() {
+//        $("#logIn").replaceWith("<a class='nav-link' href='#' id='logOut'>Log Out</a>").toggle();
+//    });
+   
+//    ($("#logOut")).click(function() {
+//     $("#logOut").replaceWith("<a class='nav-link' href='#' id='logIn'>Log In</a>").toggle();
+// });
+// $(function() {
+// ($("#logIn")).click(function() {
+//     $("#logIn").toggleClass("#logOut");
+//     return false;
+//     });
+// });
+
+// $(function() {
+//     ($("#logOut")).click(function() {
+//         $("#logOut").toggle();
+//         return false;
+//         });
+//     });
+
+   
