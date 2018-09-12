@@ -574,6 +574,7 @@ var supportedLanguages = [
     }
 ];
 
+
 database.ref().on("value", function (snapshot) {
     if (snapshot.child("userName").exists() && snapshot.child("password").exists()) {
         // Pull the variables equal to the stored values if they exist
@@ -618,7 +619,7 @@ database.ref().on("value", function (snapshot) {
         })
     };
 
-});
+
 
 // stuff for submit of text into chat
 function submitMSG(){
@@ -742,54 +743,78 @@ $("#text2TranslateInChat").on("sumbit", function () {
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 // for the userbox
 
-$("#SignUp").on("click", function (e) {
+
+database.ref().on("value", function (snapshot) {
+    if (snapshot.child("username").exists() && snapshot.child("password").exists()) {
+        // Pull the variables equal to the stored values if they exist
+        // Set the variables for username and language equal to the stored values if they exist
+        username = snapshot.val().username;
+        language = snapshot.val().language;
+
+        console.log("username and password stored");
+    } else {
+
+
+        console.log("username and password NOT stored");
+        console.log("username exists is: ");
+        console.log(snapshot.child("username").exists());
+        console.log("password exists is: ");
+        console.log(snapshot.child("password").exists());
+
+    }
+});
+
+
+database.ref().on("value", function (snapshot) {
+    if (snapshot.child("username").exists() && snapshot.child("password").exists()) {
+        // Pull the variables equal to the stored values if they exist
+        // Set the variables for username and language equal to the stored values if they exist
+        username = snapshot.val().username;
+        language = snapshot.val().language;
+
+        console.log("username and password stored");
+    } else {
+
+
+        console.log("username and password NOT stored");
+        console.log("username exists is: ");
+        console.log(snapshot.child("username").exists());
+        console.log("password exists is: ");
+        console.log(snapshot.child("password").exists());
+
+    }
+});
+
+
+$("#SignUpButton").on("click", function(e) {
     e.preventDefault();
+
+    console.log("Creating Profile as one was not found");
     //grab info from modal input boxes
-    console.log("#SignUp");
+    var username = $("#username").val();
+    var password = $("#password").val();
+    var email = $("#emailAddress").val();
+    var location = $("#selectLocation").val();
 
     //set info to database
     // post new user info to firebase
-    userName = $("#userName").val();
-    emailAddress = $("#emailAddress").val();
-    confirmPassword = $("#confirmPassword").val();
-    password = $("#password").val();
-
-    console.log("User Name: ");
-    console.log(userName);
-
-
-    database.ref().set({
-        userName: userName,
+    var newUser ={
+        username: username,
         password: password,
-        confirmPassword: confirmPassword,
-        emailAddress: emailAddress
-    }, function (error) {
-        if (error) {
-            console.log("error wrutung to databse");
+        location: selectLocation,
+        email: email
+    };
 
-        } else {
-            console.log("success writing to database");
-        }
-    });
     //push new user to database
-    //database.ref().push(newUser);
+    database.ref().push(newUser);
+
+    console.log("added new user to database");
     //alert that user has been added - another modal?
-})
 
-database.ref().on("value", function (snapshot) {
+    $("#username").val("");
+    $("#password").val("");
+    $("#emailAddress").val("");
+    $("#se").val("");
 
-    console.log("Get Started Button Clicked")
-
-    console.log(snapshot.val());
-    console.log(snapshot.val().userName);
-    console.log(snapshot.val().password);
-    console.log(snapshot.val().confirmPassword);
-    console.log(snapshot.val().emailAddress);
-
-    $(".row.userBox").text(snapshot.val().userName + '\n' + snapshot.val().emailAddress);
-    //$(".row.userBox").text(snapshot.val().password);
-    //$(".row.userBox").text(snapshot.val().emailAddress);
-    //$(".row.userBox").text(snapshot.val().confirmPassword);
 });
-
-console.log("End of UserBox Code");
+    
