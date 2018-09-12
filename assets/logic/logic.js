@@ -571,6 +571,7 @@ for (var i = 0; i < 2; i++) {
     //     });
     // })(i); // this is the syntax of an anonmous function
     //          for right now, because of CORS, we will hold of on having the translated languages be in the language selectin
+    // hello
 };
 
 
