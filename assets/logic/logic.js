@@ -1,44 +1,36 @@
 // anything we want to have happen before the page starts
 //===========================================================================
 //modal function call for login prompt
+var selectedLanguage;
 $(document).ready(function () {
     lang();
+    $("#languageList").change(function () {
+        selectedLanguage = $(this).val();
+        console.log(selectedLanguage);
+    });
+
+    // allows the send button to submit the input
     $("#submitmsg").click(function (event) {
         event.preventDefault();
-        var toAdd = $('#usermsg').val();
-        console.log('Chat Box Clicked');
-        $("#usermsg").val('');
-        // here youd need to be reading your language that is selected and the language of the user that just sent the message to the chat group as well as there text itself
+        submitMSG();
+    });
 
-        // trans('en', 'ja', toAdd)
-        //     .then(newTranslation => {
-        //         console.log(newTranslation); // this comes back with the translation
-        //         $("#chatbox").prepend(toAdd + "<br>");
-
-
-
-
-
-        //     })
-        //     .catch(error => console.error(error));
-        for (var i = 0; i < supportedLanguages.length; i++) {
-            trans('en', supportedLanguages[i].symbol, supportedLanguages[i].languageNames, i)
-                .then(newTranslation => {
-                    console.log(newTranslation); // this comes back with the translation
-                })
-                .catch(error => console.error(error));
-        }
-        console.log(supportedLanguages);
+    // allows enter to submit the text from the input
+    $("#usermsg").keypress(function(event){
+        // event.preventDefault();
+        if (event.which == 13){
+        submitMSG();
+        };
     });
     
+    // this stops the page from refreshing on enter key press
+    $("form#msg").submit(function(e){
+        e.preventDefault();
+    })
+
     $("#myBtn").click(function () {
         $("#myModal").modal();
     });
-});
-$("#languageList").change(function () {
-
-    var thing = $(this).val();
-    console.log(thing);
 });
 
 
@@ -59,431 +51,598 @@ firebase.initializeApp(config);
 
 var database = firebase.database();
 
-var supportedLanguages = [{
+var supportedLanguages = [
+    {
         languageNames: "Afrikaans",
-        symbol: "af"
+        symbol: "af",
+        translation: "Afrikaans"
     },
     {
         languageNames: "Albanian",
-        symbol: "sq"
+        symbol: "sq",
+        translation: "shqiptar"
     },
     {
         languageNames: "Amharic",
-        symbol: "am"
+        symbol: "am",
+        translation: "አማርኛ"
     },
     {
         languageNames: "Arabic",
-        symbol: "ar"
+        symbol: "ar",
+        translation: "عربى"
     },
     {
         languageNames: "Armenian",
-        symbol: "hy"
+        symbol: "hy",
+        translation: "հայերեն"
     },
     {
         languageNames: "Azeerbaijani",
-        symbol: "az"
+        symbol: "az",
+        translation: "Azeerbaijani"
     },
     {
         languageNames: "Basque",
-        symbol: "eu"
+        symbol: "eu",
+        translation: "Euskal"
     },
     {
         languageNames: "Belarusian",
-        symbol: "be"
+        symbol: "be",
+        translation: "беларускі"
     },
     {
         languageNames: "Bengali",
-        symbol: "bn"
+        symbol: "bn",
+        translation: "বাঙালি"
     },
     {
         languageNames: "Bosnian",
-        symbol: "bs"
+        symbol: "bs",
+        translation: "Bosanski"
     },
     {
         languageNames: "Bulgarian",
-        symbol: "bg"
+        symbol: "bg",
+        translation: "български"
     },
     {
         languageNames: "Catalan",
-        symbol: "ca"
+        symbol: "ca",
+        translation: "Català"
     },
     {
         languageNames: "Cebuano",
-        symbol: "ceb"
+        symbol: "ceb",
+        translation: "Cebuano"
     },
     {
         languageNames: "Chinese(Simplified)",
-        symbol: "zh-CN"
+        symbol: "zh-CN",
+        translation: "简体中文）"
     },
     {
         languageNames: "Chinese(Traditional)",
-        symbol: "zh-TW"
+        symbol: "zh-TW",
+        translation: "中國傳統的）"
     },
     {
         languageNames: "Corsican",
-        symbol: "co"
+        symbol: "co",
+        translation: "Corsu"
     },
     {
         languageNames: "Croatian",
-        symbol: "hr"
+        symbol: "hr",
+        translation: "Hrvatski"
     },
     {
         languageNames: "Czech",
-        symbol: "cs"
+        symbol: "cs",
+        translation: "čeština"
     },
     {
         languageNames: "Danish",
-        symbol: "da"
+        symbol: "da",
+        translation: "dansk"
     },
     {
         languageNames: "Dutch",
-        symbol: "nl"
+        symbol: "nl",
+        translation: "Nederlands"
     },
     {
         languageNames: "English",
-        symbol: "en"
+        symbol: "en",
+        translation: "English"
     },
     {
         languageNames: "Esperanto",
-        symbol: "eo"
+        symbol: "eo",
+        translation: "Esperanto"
     },
     {
         languageNames: "Estonian",
-        symbol: "et"
+        symbol: "et",
+        translation: "Eesti keel"
     },
     {
         languageNames: "Finnish",
-        symbol: "fi"
+        symbol: "fi",
+        translation: "Suomalainen"
     },
     {
         languageNames: "French",
-        symbol: "fr"
+        symbol: "fr",
+        translation: "français"
     },
     {
         languageNames: "Frisian",
-        symbol: "fy"
+        symbol: "fy",
+        translation: "Frysk"
     },
     {
         languageNames: "Galician",
-        symbol: "gl"
+        symbol: "gl",
+        translation: "Galego"
     },
     {
         languageNames: "Georgian",
-        symbol: "ka"
+        symbol: "ka",
+        translation: "ქართული"
     },
     {
         languageNames: "German",
-        symbol: "de"
+        symbol: "de",
+        translation: "Deutsche"
     },
     {
         languageNames: "Greek",
-        symbol: "el"
+        symbol: "el",
+        translation: "Ελληνικά"
     },
     {
         languageNames: "Gujarati",
-        symbol: "gu"
+        symbol: "gu",
+        translation: "ગુજરાતી"
     },
     {
         languageNames: "Haitian Creole",
-        symbol: "ht"
+        symbol: "ht",
+        translation: "Kreyòl Ayisyen"
     },
     {
         languageNames: "Hausa",
-        symbol: "ha"
+        symbol: "ha",
+        translation: "Hausa"
     },
     {
         languageNames: "Hawaiian",
-        symbol: "haw"
+        symbol: "haw",
+        translation: "ʻŌlelo Hawaiʻi"
     },
     {
         languageNames: "Hebrew",
-        symbol: "he"
+        symbol: "he",
+        translation: "עִברִית"
     },
     {
         languageNames: "Hindi",
-        symbol: "hi"
+        symbol: "hi",
+        translation: "हिंदी"
     },
     {
         languageNames: "Hmong",
-        symbol: "hmn"
+        symbol: "hmn",
+        translation: "Hmoob"
     },
     {
         languageNames: "Hungarian",
-        symbol: "hu"
+        symbol: "hu",
+        translation: "Magyar"
     },
     {
         languageNames: "Icelandic",
-        symbol: "is"
+        symbol: "is",
+        translation: "Íslensku"
     },
     {
         languageNames: "Igbo",
-        symbol: "ig"
+        symbol: "ig",
+        translation: "Igbo"
     },
     {
         languageNames: "Indonesian",
-        symbol: "id"
+        symbol: "id",
+        translation: "bahasa Indonesia"
     },
     {
         languageNames: "Irish",
-        symbol: "ga"
+        symbol: "ga",
+        translation: "Gaeilge"
     },
     {
         languageNames: "Italian",
-        symbol: "it"
+        symbol: "it",
+        translation: "italiano"
     },
     {
         languageNames: "Japanese",
-        symbol: "ja"
+        symbol: "ja",
+        translation: "日本語"
     },
     {
         languageNames: "Javanese",
-        symbol: "jw"
+        symbol: "jw",
+        translation: "Wong Jawa"
     },
     {
         languageNames: "Kannada",
-        symbol: "kn"
+        symbol: "kn",
+        translation: "ಕನ್ನಡ"
     },
     {
         languageNames: "Kazakh",
-        symbol: "kk"
+        symbol: "kk",
+        translation: "Қазақша"
     },
     {
         languageNames: "Khmer",
-        symbol: "km"
+        symbol: "km",
+        translation: "ភាសាខ្មែរ"
     },
     {
         languageNames: "Korean",
-        symbol: "ko"
+        symbol: "ko",
+        translation: "한국어"
     },
     {
         languageNames: "Kurdish",
-        symbol: "ku"
+        symbol: "ku",
+        translation: "Kurdî"
     },
     {
         languageNames: "Kyrgyz",
-        symbol: "ky"
+        symbol: "ky",
+        translation: "Кыргызча"
     },
     {
         languageNames: "Lao",
-        symbol: "lo"
+        symbol: "lo",
+        translation: "ລາວ"
     },
     {
         languageNames: "Latin",
-        symbol: "la"
+        symbol: "la",
+        translation: "Latine"
     },
     {
         languageNames: "Latvian",
-        symbol: "lv"
+        symbol: "lv",
+        translation: "Latviešu"
     },
     {
         languageNames: "Lithuanian",
-        symbol: "lt"
+        symbol: "lt",
+        translation: "Lietuviškai"
     },
     {
         languageNames: "Luxembourgish",
-        symbol: "lb"
+        symbol: "lb",
+        translation: "lëtzebuergesch"
     },
     {
         languageNames: "Macedonian",
-        symbol: "mk"
+        symbol: "mk",
+        translation: "Македонски"
     },
     {
         languageNames: "Malagasy",
-        symbol: "mg"
+        symbol: "mg",
+        translation: "Malagasy"
     },
     {
         languageNames: "Malay",
-        symbol: "ms"
+        symbol: "ms",
+        translation: "Melayu"
     },
     {
         languageNames: "Malayalam",
-        symbol: "ml"
+        symbol: "ml",
+        translation: "മലയാളം"
     },
     {
         languageNames: "Maltese",
-        symbol: "mt"
+        symbol: "mt",
+        translation: "Malti"
     },
     {
         languageNames: "Maori",
-        symbol: "mi"
+        symbol: "mi",
+        translation: "Maori"
     },
     {
         languageNames: "Marathi",
-        symbol: "mr"
+        symbol: "mr",
+        translation: "मराठी"
     },
     {
         languageNames: "Mongolian",
-        symbol: "mn"
+        symbol: "mn",
+        translation: "Монгол хэл"
     },
     {
         languageNames: "Myanmar(Burmese)",
-        symbol: "my"
+        symbol: "my",
+        translation: "မြန်မာ (ဗမာ)"
     },
     {
         languageNames: "Nepali",
-        symbol: "ne"
+        symbol: "ne",
+        translation: "नेपाली"
     },
     {
         languageNames: "Norwegian",
-        symbol: "no"
+        symbol: "no",
+        translation: "norsk"
     },
     {
         languageNames: "Nyanja(Chichewa)",
-        symbol: "ny"
+        symbol: "ny",
+        translation: "Nyanja (Chichewa)"
     },
     {
         languageNames: "Pashto",
-        symbol: "ps"
+        symbol: "ps",
+        translation: "پښتو"
     },
     {
         languageNames: "Persian",
-        symbol: "fa"
+        symbol: "fa",
+        translation: "فارسی"
     },
     {
         languageNames: "Polish",
-        symbol: "pl"
+        symbol: "pl",
+        translation: "Polskie"
     },
     {
         languageNames: "Portuguese(Portugal, Brazil)",
-        symbol: "pt"
+        symbol: "pt",
+        translation: "Português (Portugal, Brasil)"
     },
     {
         languageNames: "Punjabi",
-        symbol: "pa"
+        symbol: "pa",
+        translation: "ਪੰਜਾਬੀ"
     },
     {
         languageNames: "Romanian",
-        symbol: "ro"
+        symbol: "ro",
+        translation: "Română"
     },
     {
         languageNames: "Russian",
-        symbol: "ru"
+        symbol: "ru",
+        translation: "русский"
     },
     {
         languageNames: "Samoan",
-        symbol: "sm"
+        symbol: "sm",
+        translation: "Samoa"
     },
     {
         languageNames: "Scots Gaelic",
-        symbol: "gd"
+        symbol: "gd",
+        translation: "Gàidhlig na h-Alba"
     },
     {
         languageNames: "Serbian",
-        symbol: "sr"
+        symbol: "sr",
+        translation: "Српски"
     },
     {
         languageNames: "Sesotho",
-        symbol: "st"
+        symbol: "st",
+        translation: "Sesotho"
     },
     {
         languageNames: "Shona",
-        symbol: "sn"
+        symbol: "sn",
+        translation: "Shona"
     },
     {
         languageNames: "Sindhi",
-        symbol: "sd"
+        symbol: "sd",
+        translation: "سنڌي"
     },
     {
         languageNames: "Sinhala(Sinhalese)",
-        symbol: "si"
+        symbol: "si",
+        translation: "සිංහල (සිංහල)"
     },
     {
         languageNames: "Slovak",
-        symbol: "sk"
+        symbol: "sk",
+        translation: "slovenský"
     },
     {
         languageNames: "Slovenian",
-        symbol: "sl"
+        symbol: "sl",
+        translation: "Slovenščina"
     },
     {
         languageNames: "Somali",
-        symbol: "so"
+        symbol: "so",
+        translation: "Somali"
     },
     {
         languageNames: "Spanish",
-        symbol: "es"
+        symbol: "es",
+        translation: "Español"
     },
     {
         languageNames: "Sundanese",
-        symbol: "su"
+        symbol: "su",
+        translation: "Sunda"
     },
     {
         languageNames: "Swahili",
-        symbol: "sw"
+        symbol: "sw",
+        translation: "Kiswahili"
     },
     {
         languageNames: "Swedish",
-        symbol: "sv"
+        symbol: "sv",
+        translation: "svenska"
     },
     {
         languageNames: "Tagalog(Filipino)",
-        symbol: "tl"
+        symbol: "tl",
+        translation: "Tagalog (Filipino)"
     },
     {
         languageNames: "Tajik",
-        symbol: "tg"
+        symbol: "tg",
+        translation: "Тоҷикӣ"
     },
     {
         languageNames: "Tamil",
-        symbol: "ta"
+        symbol: "ta",
+        translation: "தமிழ்"
     },
     {
         languageNames: "Telugu",
-        symbol: "te"
+        symbol: "te",
+        translation: "తెలుగు"
     },
     {
         languageNames: "Thai",
-        symbol: "th"
+        symbol: "th",
+        translation: "ไทย"
     },
     {
         languageNames: "Turkish",
-        symbol: "tr"
+        symbol: "tr",
+        translation: "Türk"
     },
     {
         languageNames: "Ukrainian",
-        symbol: "uk"
+        symbol: "uk",
+        translation: "Українська"
     },
     {
         languageNames: "Urdu",
-        symbol: "ur"
+        symbol: "ur",
+        translation: "اردو"
     },
     {
         languageNames: "Uzbek",
-        symbol: "uz"
+        symbol: "uz",
+        translation: "O'zbek"
     },
     {
         languageNames: "Vietnamese",
-        symbol: "vi"
+        symbol: "vi",
+        translation: "Tiếng Việt"
     },
     {
         languageNames: "Welsh",
-        symbol: "cy"
+        symbol: "cy",
+        translation: "Cymraeg"
     },
     {
         languageNames: "Xhosa",
-        symbol: "xh"
+        symbol: "xh",
+        translation: "isiXhosa"
     },
     {
         languageNames: "Yiddish",
-        symbol: "yi"
+        symbol: "yi",
+        translation: "ייִדיש"
     },
     {
         languageNames: "Yoruba",
-        symbol: "yo"
+        symbol: "yo",
+        translation: "Yorùbá"
     },
     {
         languageNames: "Zulu",
-        symbol: "zu"
+        symbol: "zu",
+        translation: "Zulu"
     }
 ];
 
 
+database.ref().on("value", function (snapshot) {
+    if (snapshot.child("userName").exists() && snapshot.child("password").exists()) {
+        // Pull the variables equal to the stored values if they exist
+        // Set the variables for userName and language equal to the stored values if they exist
+        userName = snapshot.val().userName;
+        language = snapshot.val().language;
+
+        console.log("userName and password stored");
+    } else {
 
 
-// giphy api button stuff
-$("#button-for-giphs").click(function () {
+        ("userName and password NOT stored");
+        console.log("userName exists is: ");
+        console.log(snapshot.child("userName").exists());
+        console.log("password exists is: ");
+        console.log(snapshot.child("password").exists());
 
-    console.log("button GIF");
+
+        $("#create-profile").click(function () {
+
+            console.log("Creating Profile as one was not found");
+            //grab info from modal input boxes
+            userName = $("#userName").val().trim;
+            password = $("#password").val().trim;
+            language = $("#language").val().trim;
+            email = $("#email").val().trim;
+
+            //set info to database
+            // post new user info to firebase
+            database.ref().set({
+                userName: userName,
+                password: password,
+                language: setLanguage,
+                email: email
+            });
+
+            //push new user to database
+            database.ref().push(newUser);
+
+            console.log("added new user to database");
+            //alert that user has been added - another modal?
+        })
+    };
+
+
+
+// stuff for submit of text into chat
+function submitMSG(){
+    console.log(selectedLanguage);
+    var toAdd = $('#usermsg').val();
+    console.log('Chat Box Clicked');
+$("#usermsg").val('');
+// here youd need to be reading your language that is selected and the language of the user that just sent the message to the chat group as well as there text itself
+trans(selectedLanguage, 'en'/* this value should be the language that other user have seleceted */, toAdd /* this value should be the last thing(child) input to the chat in the data base*/)
+.then(newTranslation => {
+    console.log(newTranslation); // this comes back with the translation
+        $("#chatbox").prepend(newTranslation + "<br>");
+        // anything needing a translation must be sent through here, latency
+        
+    })
+    .catch(error => console.error(error));
+};
+    
+    
+    // giphy api button stuff
+    $("#button-for-giphs").click(function () {
+        
+        console.log("button GIF");
 
     var inputsArray = [];
     var userInput = $("#user-selection").val().trim();
@@ -508,7 +667,7 @@ function lang() {
     console.log("Languages Added");
     for (var i = 0; i < translatedNames.length; i++) {
         //console.log(supportedLanguages[i].languageNames);
-        var options = $("<option>").text(supportedLanguages[i].languageNames);
+        var options = $("<option>").text(supportedLanguages[i].translation);
         options.attr("value", supportedLanguages[i].symbol);
         $("#languageList").append(options);
     };
@@ -526,7 +685,6 @@ function trans(selectedLanguage, translatedLanguage, translatedText, i) {
         }).then(function (response) {
             console.log(response);
             var newTranslation = response[0][0][0];
-            supportedLanguages[i].translation = newTranslation;
             resolve(newTranslation);
         }).catch(function (error) {
             reject(error);
