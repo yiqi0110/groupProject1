@@ -1,4 +1,3 @@
-
 // anything we want to have happen before the page starts
 //===========================================================================
 //modal function call for login prompt
@@ -6,14 +5,15 @@ $(document).ready(function () {
     $("#submitmsg").click(function (event) {
         event.preventDefault();
         var toAdd = $('#usermsg').val();
-        $("#chatbox").append(toAdd + "<br>");
+        $("#chatbox").prepend(toAdd + "<br>");
         console.log('Chat Box Clicked');
         $("#usermsg").val('');
+        var translatedSTUFF = trans('en', 'ja', toAdd);
+        console.log("this is the text from the chatbox: "+ translatedSTUFF);
     });
     $("#myBtn").click(function () {
         $("#myModal").modal();
     });
-    lang();
 });
 
 
@@ -460,7 +460,7 @@ database.ref().on("value", function (snapshot) {
     } else {
 
 
-        console.log("userName and password NOT stored");
+        ("userName and password NOT stored");
         console.log("userName exists is: ");
         console.log(snapshot.child("userName").exists());
         console.log("password exists is: ");
@@ -493,83 +493,51 @@ database.ref().on("value", function (snapshot) {
         })
     };
 
+});
 
-    // giphy api button stuff
-    $("#button-for-giphs").click(function () {
+// giphy api button stuff
+$("#button-for-giphs").click(function () {
 
-        console.log("button GIF");
+    console.log("button GIF");
 
-        var inputsArray = [];
-        var userInput = $("#user-selection").val().trim();
-        inputsArray.push(userInput);
+    var inputsArray = [];
+    var userInput = $("#user-selection").val().trim();
+    inputsArray.push(userInput);
 
-        $.ajax({
-            url: "https://api.giphy.com/v1/gifs/search",
-            APIKey: "4cK7PhqwwNF15DHlSkE0A2ttuyHL6uoX",
-            method: "GET",
-            q: inputsArray,
-            limit: 5
-        }).then(function (data) {
-            // Log the resulting object
-            //console.log(data);
+    $.ajax({
+        url: "https://api.giphy.com/v1/gifs/search",
+        APIKey: "4cK7PhqwwNF15DHlSkE0A2ttuyHL6uoX",
+        method: "GET",
+        q: inputsArray,
+        limit: 5
+    }).then(function (data) {
+        // Log the resulting object
+        //console.log(data);
 
-            $("#giph-scroll-img").append(data.image);
+        $("#giph-scroll-img").append(data.image);
 
-        });
     });
 });
 
-function lang() {
-    console.log("Languages Added");
-    for (var i = 0; i < supportedLanguages.length; i++) {
-        //console.log(supportedLanguages[i].languageNames);
-        var options = $("<option>").text(supportedLanguages[i].languageNames);
-        $("#languageList").append(options);
-    };
-};
+// translation section
+var trans = function (selectedLanguage, translatedLanguage, translatedText) {
 
-// giphy api button stuff  
-
-// console.log(supportedLanguages.length);
-
-var newTranslation;
-
-// var translatedName = [];
-for (var i = 0; i < 2; i++) {
-    selectedLanguage = 'en';
-    translatedLanguage = supportedLanguages[i].symbol;
-    translatedText = supportedLanguages[i].languageNames;
     var translateURL = "https://translate.googleapis.com/translate_a/single?client=gtx&sl=" + selectedLanguage + "&tl=" + translatedLanguage + "&dt=t&q=" + translatedText;
 
+    $.ajax({
+        url: translateURL,
+        method: "POST",
+        headers: {
+            'Access-Control-Allow-Origin': '*'      // is maybe a way to work around cors issues
+        }
+    }).then(function (response) {
+        newTranslation = response[0][0][0];
+        translatedName.push(newTranslation);
+        console.log(translatedName);
+        console.log(i);
 
-    // (function (i) {
-
-    //     $.ajax({
-    //         url: translateURL,
-    //         method: "POST"
-    //     }).then(function (response) {
-    //         newTranslation = response[0][0][0];
-    //         translatedName.push(newTranslation);
-    //         console.log(translatedName);
-    //         console.log(i);
-
-    //         // console.log(translator);
-    //         // console.log(response[0][0][0]); // this is the tl response
-    //         // console.log(translator[0][0][1]); // this is the sl response
-    //         // console.log(newTranslation);
-    //         // console.log(translator[0][0][0]);
-    //         // for use of adding the language name into the object supportedLanguages
-    //     });
-    // })(i); // this is the syntax of an anonmous function
-    //          for right now, because of CORS, we will hold of on having the translated languages be in the language selectin
+    });
 };
-
-
-
-
-// function functionality
-//===========================================================================
-
 
 // Any input that is put into the chat box will be sent as the users language and the translated to the other users language
 $("#text2TranslateInChat").on("sumbit", function () {
@@ -581,34 +549,6 @@ $("#text2TranslateInChat").on("sumbit", function () {
     translatedText = '#';
 }); // end of input retrieval
 
-// sign in or create profile or anonymous profile
-
-// sign in ==> input username and password
-
-// create profile ==> set username and password, and set language
-
-// anonymous ==> set language
-
-// on.click submit to translator as well as submit text to chat
-
-
-//submit text to chat 
-
-
-
-// giphy stuff from last project in a scroll menu to choose from
-
-// gif post into the chatroom
-
-
-//language dropdown option
-var langOptions = supportedLanguages;
-var mySelect = $('#langSelect');
-$.each(langOptions, function (val, text) {
-    mySelect.append(
-        $('<option></option>').val(val).html(text)
-    );
-});
 
 //Profile page code, still testing//
 //     // var newPhoto = {file: ""}
@@ -632,5 +572,60 @@ $.each(langOptions, function (val, text) {
 //    //function (getprofilepic) {
 //        //get the file name of newPhoto
 //        //put the name into a string
-       
-   //}
+
+//}
+
+//++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+// for the userbox
+
+$("#SignUp").on("click", function (e) {
+    e.preventDefault();
+    //grab info from modal input boxes
+    console.log("#SignUp");
+
+    //set info to database
+    // post new user info to firebase
+    userName = $("#userName").val();
+    emailAddress = $("#emailAddress").val();
+    confirmPassword = $("#confirmPassword").val();
+    password = $("#password").val();
+
+    console.log("User Name: ");
+    console.log(userName);
+
+
+    database.ref().set({
+        userName: userName,
+        password: password,
+        confirmPassword: confirmPassword,
+        emailAddress: emailAddress
+    }, function (error) {
+        if (error) {
+            console.log("error wrutung to databse");
+
+        } else {
+            console.log("success writing to database");
+        }
+    });
+    //push new user to database
+    //database.ref().push(newUser);
+    //alert that user has been added - another modal?
+})
+
+database.ref().on("value", function (snapshot) {
+
+    console.log("Get Started Button Clicked")
+
+    console.log(snapshot.val());
+    console.log(snapshot.val().userName);
+    console.log(snapshot.val().password);
+    console.log(snapshot.val().confirmPassword);
+    console.log(snapshot.val().emailAddress);
+
+    $(".row.userBox").text(snapshot.val().userName + '\n' + snapshot.val().emailAddress);
+    //$(".row.userBox").text(snapshot.val().password);
+    //$(".row.userBox").text(snapshot.val().emailAddress);
+    //$(".row.userBox").text(snapshot.val().confirmPassword);
+});
+
+console.log("End of UserBox Code");
