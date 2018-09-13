@@ -439,7 +439,7 @@ h4 {
     color: white;
 }
 
-.dropdown-content{
+/* .dropdown-content{
 display: none;
 position: absolute;
 background-color: #f1f1f1;
@@ -451,4 +451,8 @@ z-index: 1;
 
 .dropdown-thing:hover .dropdown-content {display: block;}
 
-.dropdown-thing:hover .dropbtn {background-color: #3e8e41;}
+.dropdown-thing:hover .dropbtn {background-color: #3e8e41;} */
+
+@media only screen and (max-width: 766px) {
+    /* do stuff */
+}
