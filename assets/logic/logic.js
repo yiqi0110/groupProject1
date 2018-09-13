@@ -1,12 +1,28 @@
 // anything we want to have happen before the page starts
 //===========================================================================
+var config = {
+    apiKey: "AIzaSyASqrK4S3eQgWUGX50opVsjseOvM8W4a6w",
+    authDomain: "global-chat-d7bc1.firebaseapp.com",
+    databaseURL: "https://global-chat-d7bc1.firebaseio.com",
+    projectId: "global-chat-d7bc1",
+    storageBucket: "",
+    messagingSenderId: "637256265061"
+};
+
+firebase.initializeApp(config);
+
+var database = firebase.database();
+
 //modal function call for login prompt
 var selectedLanguage;
+var translatedLanguage;
+
 $(document).ready(function () {
-    lang();
+    languageADDED();
     $("#languageList").change(function () {
         selectedLanguage = $(this).val();
         console.log(selectedLanguage);
+        translatesFromGlobalChat();
     });
 
     // allows the send button to submit the input
@@ -16,41 +32,40 @@ $(document).ready(function () {
     });
 
     // allows enter to submit the text from the input
-    $("#usermsg").keypress(function(event){
+    $("#usermsg").keypress(function (event) {
         // event.preventDefault();
-        if (event.which == 13){
-        submitMSG();
+        if (event.which == 13) {
+            submitMSG();
         };
 
     });
-    
+
     // this stops the page from refreshing on enter key press
-    $("form#msg").submit(function(e){
+    $("form#msg").submit(function (e) {
         e.preventDefault();
     })
 
     $("#myBtn").click(function () {
         $("#myModal").modal();
     });
+
 });
 
-
-
-
-
-
-var config = {
-    apiKey: "AIzaSyCGtI9XNr0J-kA2A7VgdavXQXtoNiN6vcI",
-    authDomain: "project1-8d0be.firebaseapp.com",
-    databaseURL: "https://project1-8d0be.firebaseio.com",
-    projectId: "project1-8d0be",
-    storageBucket: "project1-8d0be.appspot.com",
-    messagingSenderId: "799117703087"
+// to retrieve any dat from the database only if the language was selected
+function translatesFromGlobalChat (){
+    database.ref("/globalCHAT").limitToLast(3).on("child_added", function (snapshot) {
+        console.log(snapshot.val());
+        var chatTEXT = $("<div>").addClass("chatTEXT").attr("value", snapshot.val().lang).append(snapshot.val().text).attr("style", "color: #blue");
+        trans(snapshot.val().lang, selectedLanguage, snapshot.val().text)
+        .then(newTranslation => {
+            console.log(newTranslation); // this comes back with the translation
+            // anything needing a translation must be sent through here, latency
+            $("#chatbox").prepend(newTranslation +"<br>");
+        })
+        .catch(error => console.error(error));
+});
 };
 
-firebase.initializeApp(config);
-
-var database = firebase.database();
 
 
 var supportedLanguages = [
@@ -577,144 +592,65 @@ var supportedLanguages = [
 ];
 
 
-database.ref().on("value", function (snapshot) {
-    console.log("working");
-    if (snapshot.child("username").exists() && snapshot.child("password").exists()) {
-        // Pull the variables equal to the stored values if they exist
-        // Set the variables for userName and language equal to the stored values if they exist
-        userName = snapshot.val().userName;
-        language = snapshot.val().language;
-
-        console.log("username and password stored");
-    } else {
-
-
-        ("username and password NOT stored");
-        console.log("username exists is: ");
-        console.log(snapshot.child("username").exists());
-        console.log("password exists is: ");
-        console.log(snapshot.child("password").exists());
-
-
-        $("#create-profile").on("click", function () {
-            function Profile() {
-                console.log("Creating Profile as one was not found");
-                //grab info from modal input boxes
-                userName = $("#username").val().trim;
-                password = $("#password").val().trim;
-                language = $("#language").val().trim;
-                email = $("#emailAddress").val().trim;
-
-                //set info to database
-                // post new user info to firebase
-                database.ref().set({
-                    userName: userName,
-                    password: password,
-                    language: setLanguage,
-                    email: email
-                });
-
-                //push new user to database
-                database.ref().push(newUser);
-
-                console.log("added new user to database");
-                //alert that user has been added - another modal?
-            }
-        })
-    };
-
-
-    Profile();
-    $(document).on("click", "#create-profile", Profile());
 
 
 
-/* giphy api button stuff
-$("#button-for-giphs").click(function () {
 
 
 // stuff for submit of text into chat
-function submitMSG(){
+
+function submitMSG() {
+
+    // NEEDS TO CHECK IF IMG OR TEXT THEN DO WHATEVER ACCORDINGLY
+
+
     console.log(selectedLanguage);
-    var toAdd = $('#usermsg').val();
+    var toAdd = $('#usermsg').val().trim();
     console.log('Chat Box Clicked');
-$("#usermsg").val('');
-// here youd need to be reading your language that is selected and the language of the user that just sent the message to the chat group as well as there text itself
-trans(selectedLanguage, 'en'/* this value should be the language that other user have seleceted */, toAdd /* this value should be the last thing(child) input to the chat in the data base*/)
-.then(newTranslation => {
-    console.log(newTranslation); // this comes back with the translation
-        $("#chatbox").prepend(newTranslation + "<br>");
-        // anything needing a translation must be sent through here, latency
-        
-    })
-    .catch(error => console.error(error));
+    $("#usermsg").val('');
+    var chatTEXT = {
+        text: toAdd,
+        lang: selectedLanguage
+    };
+    database.ref("/globalCHAT").push(chatTEXT);
 };
-    
-    
-    // giphy api button stuff
-    $("#button-for-giphs").click(function () {
-        
-        console.log("button GIF");
 
-    var inputsArray = [];
-    var userInput = $("#user-selection").val().trim();
-    inputsArray.push(userInput);
-
-    $.ajax({
-        url: "https://api.giphy.com/v1/gifs/search",
-        APIKey: "4cK7PhqwwNF15DHlSkE0A2ttuyHL6uoX",
-        method: "GET",
-        q: inputsArray,
-        limit: 5
-    }).then(function (data) {
-        // Log the resulting object
-        //console.log(data);
-
-        $("#giph-scroll-img").append(data.image);
-
-    });
-});
-*/
 // An array of actions, new actions will be pushed into this array;
 $(".dropdown").on("click", function () {
     var gifs = ["Funny", "Sad", "Happy", "Excited", "Hopeful"];
 
-    // Creating Functions & Methods
-    // Function that displays all gif buttons
-    function displayGifButtons() {
-        $("#gifButtonsView").empty(); // erasing anything in this div id so that it doesnt duplicate the results
-        for (var i = 0; i < gifs.length; i++) {
-            var gifButton = $("<button>");
-            gifButton.addClass("dropdown-item");
-            gifButton.attr("data-name", gifs[i]);
-            gifButton.text(gifs[i]);
-            $("#gifButtonsView").append(gifButton);
-        }
-    }
+    // // Creating Functions & Methods
+    // // Function that displays all gif buttons
+    // function displayGifButtons() {
+    //     $("#gifButtonsView").empty(); // erasing anything in this div id so that it doesnt duplicate the results
+        
+    //     var gifText = $("#usermsg").val();
+    //     console.log
+    //     $("#gifButtonsView").append(gifButton);
+        
+    // }
 
     // Function that displays all of the gifs
     function displayGifs() {
-        var action = $(this).attr("data-name");
-        var queryURL = "http://api.giphy.com/v1/gifs/search?q=" + action + "&api_key=4cK7PhqwwNF15DHlSkE0A2ttuyHL6uoX&limit=3";
+        var gifSEARCH = $("#usermsg").val();
+        console.log(gifSEARCH);
+        var queryURL = "http://api.giphy.com/v1/gifs/search?q=" + gifSEARCH + "&api_key=4cK7PhqwwNF15DHlSkE0A2ttuyHL6uoX&limit=3";
         console.log(queryURL); // displays the constructed url
         $.ajax({
-            url: queryURL,
-            method: 'GET'
-        })
+                url: queryURL,
+                method: 'GET'
+            })
             .done(function (response) {
                 console.log(response); // console test to make sure something returns
-                $("#submitmsg").empty(); // erasing anything in this div id so that it doesnt keep any from the previous click
+                // $("#submitmsg").empty(); // erasing anything in this div id so that it doesnt keep any from the previous click
                 var results = response.data; //shows results of gifs
-                if (results == "") {
-                    alert("There isn't a gif for this selected button");
-                }
                 for (var i = 0; i < results.length; i++) {
 
                     var gifDiv = $("<div>"); //div for the gifs to go inside
                     gifDiv.addClass("gifDiv");
                     // pulling gif
-                    var gifImage = $("<img>");       
-                    gifImage.attr("data-animate", results[i].images.fixed_height_small.url); // animated image
+                    var gifImage = $("<img>");
+                    gifImage.attr("data-type", gifSEARCH).attr('src', results[i].images.fixed_height_small.url); // animated image
                     gifImage.attr("data-state", "animate"); // set the image state
                     gifImage.addClass("image");
                     gifDiv.append(gifImage);
@@ -725,16 +661,14 @@ $(".dropdown").on("click", function () {
             });
     }
     // Calling Functions & Methods
-    displayGifButtons(); // displays list of actions already created
-    displayGifs();
+    // displayGifButtons(); // displays list of actions already created
 
     // Document Event Listeners
-    $(document).on("click", ".dropdown", displayGifs);
+    $(document).on("click", ".dropdown", displayGifs());
 });
-var newTranslation = '';
 
 
-function lang() {
+function languageADDED() {
     console.log("Languages Added");
     for (var i = 0; i < translatedNames.length; i++) {
         //console.log(supportedLanguages[i].languageNames);
@@ -764,53 +698,6 @@ function trans(selectedLanguage, translatedLanguage, translatedText, i) {
     })
 };
 
-
-// Any input that is put into the chat box will be sent as the users language and the translated to the other users language
-$("#text2TranslateInChat").on("sumbit", function () {
-    // takes set language from user
-    selectedLanguage = '#';
-    // takes language to be translate to
-    translatedLanguage = '#';
-    // takes the text 2 be translated
-    translatedText = '#';
-}); // end of input retrieval
-
-// for (var i = 0; i < 2; i++) {
-//     trans('en', supportedLanguages[i].symbol, supportedLanguages[i].languageNames)
-//         .then(newTranslation => {
-//             console.log(newTranslation); // this comes back with the translation
-//             supportedLanguages[i].translation = newTranslation;
-//             console.log(supportedLanguages[i]);
-
-//         })
-//         .catch(error => console.error(error));
-// };
-
-
-//Profile page code, still testing//
-//     // var newPhoto = {file: ""}
-//     var name = ""
-//     var profileEmail = email.val().trim();
-//     var defaultLang = []
-//     var userLocation = []
-//     var profileText = $("#profileText");
-//    // var lastLogin = place time code here
-
-//    if (document.onclick($("#save"))) {
-//        // $("#profilePhoto").html("<img src=" + newPhoto + "id='profilePhoto'>")
-//        $("#username").text(name);
-//        $("#emailAddress").text(profileEmail);
-//         $("#languageSelect").text(defaultLang);
-//         $("#countrySelect").text(userLocation);
-//    //     $("#lastLogin").text(lastLogin);
-//        $("#pText").text(profileText);
-//     }
-
-//    //function (getprofilepic) {
-//        //get the file name of newPhoto
-//        //put the name into a string
-
-//}
 
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 // for the userbox
@@ -858,7 +745,7 @@ database.ref().on("value", function (snapshot) {
 });
 
 
-$("#SignUpButton").on("click", function(e) {
+$("#SignUpButton").on("click", function (e) {
     e.preventDefault();
 
     console.log("Creating Profile as one was not found");
@@ -870,7 +757,7 @@ $("#SignUpButton").on("click", function(e) {
 
     //set info to database
     // post new user info to firebase
-    var newUser ={
+    var newUser = {
         username: username,
         password: password,
         location: selectLocation,
@@ -878,7 +765,7 @@ $("#SignUpButton").on("click", function(e) {
     };
 
     //push new user to database
-    database.ref().push(newUser);
+    database.ref("/username-" + username).push(newUser);
 
     console.log("added new user to database");
     //alert that user has been added - another modal?
@@ -889,5 +776,3 @@ $("#SignUpButton").on("click", function(e) {
     $("#se").val("");
 
 });
-    
-

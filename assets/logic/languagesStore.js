@@ -120,3 +120,52 @@ var thing = [
 {languageNames: "Yoruba", symbol: "yo", translation: "Yorùbá"},
 {languageNames: "Zulu", symbol: "zu", translation: "Zulu"}
 ];
+
+
+// database.ref().on("value", function (snapshot) {
+//     console.log("working");
+//     if (snapshot.child("username").exists() && snapshot.child("password").exists()) {
+//         // Pull the variables equal to the stored values if they exist
+//         // Set the variables for userName and language equal to the stored values if they exist
+//         userName = snapshot.val().userName;
+//         language = snapshot.val().language;
+
+//         console.log("username and password stored");
+//     } else {
+
+
+//         ("username and password NOT stored");
+//         console.log("username exists is: ");
+//         console.log(snapshot.child("username").exists());
+//         console.log("password exists is: ");
+//         console.log(snapshot.child("password").exists());
+
+
+//         $("#create-profile").on("click", function () {
+//             function Profile() {
+//                 console.log("Creating Profile as one was not found");
+//                 //grab info from modal input boxes
+//                 userName = $("#username").val().trim;
+//                 password = $("#password").val().trim;
+//                 language = $("#language").val().trim;
+//                 email = $("#emailAddress").val().trim;
+
+//                 //set info to database
+//                 // post new user info to firebase
+//                 database.ref().set({
+//                     userName: userName,
+//                     password: password,
+//                     language: setLanguage,
+//                     email: email
+//                 });
+
+//                 //push new user to database
+//                 database.ref().push(newUser);
+
+//                 console.log("added new user to database");
+//                 //alert that user has been added - another modal?
+//             }
+//             $(document).on("click", "#create-profile", Profile());
+//         })
+//     };
+// });
