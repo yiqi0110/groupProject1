@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Lexicon</title>
+  <link rel="icon" type="image/png" href="assets/images/logo.png" />
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
     crossorigin="anonymous">
   <link rel="stylesheet" href="assets/style/style.css">
@@ -15,38 +16,14 @@
 
 <body>
   <!--Navbar-->
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="#">Lexicon</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText"
-      aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarText">
-      <ul class="navbar-nav mr-auto">
-        <li class="nav-item active">
-          <a class="nav-link" href="index.html">Home <span class="sr-only">(current)</span></a>
-        </li>
-
-        <li class="nav-item">
-          <a class="nav-link" href="profile.html">Profile</a>
-        </li>
-      </ul>
-
-      <span class="navbar-nav mr-auto" id="logIn">
-        <a class="nav-link" href="#">Login</a><a class="nav-link" href="#">Sign Up</a>
-
-      </span>
-    </div>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top">
+      <img src="assets/images/logo.png" width="70px" height="40px">    <!-- dim 7/4 -->
   </nav>
 
   <!--Jumbotron-->
   <div class="jumbotron">
 
     <div class="row">
-
-      <div class="col-md-6" id="logoHolder">
-        <h1 class="display-4"><img src="assets/images/logo.png" id="logo"></h1>
-      </div>
       <div class="col-md-4">
         <p class="lead">Welcome to Lexicon global chat room,
           the app that allows you to chat with friends of
@@ -76,41 +53,25 @@
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Quick Start</h5>
+          <h5 class="modal-title" id="exampleModalLabel">Set a name and pick a language!</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
         <form id="SignUp">
           <div class="form-group">
-            <label for="exampleFormControlInput1">Email address</label>
-            <input type="email" class="form-control" id="emailAddress" placeholder="name@example.com">
-          </div>
-          <div class="form-group">
             <label for="exampleFormControlInput1">Username</label>
             <input type="text" class="form-control" id="username" placeholder="name">
-          </div>
-          <div class="form-group">
-            <label for="exampleFormControlInput1">Password</label>
-            <input type="password" class="form-control" id="password">
-          </div>
-          <div class="form-group">
-            <label for="exampleFormControlInput1">Confirm Password</label>
-            <input type="password" class="form-control" id="confirmPassword">
-          </div>
-          <div class="form-group">
-            <label for="exampleFormControlSelect1">Select Location:</label>
-            <select class="form-control" id="selectLocation">
-              <option>United States</option>
-              <option>2</option>
-              <option>3</option>
-              <option>4</option>
-              <option>5</option>
-            </select>
-          </div>
-          <br>
+            <div class="form-group">
+              <label for="exampleFormControlSelect1">Select Your Language:</label>
+              <select class="form-control" id="languageList">
+              </select>
+            </div>
+            <br>
 
-          <a class="btn btn-primary" href="#" role="button" id="create-profile">Sign me up!</a>
+            <div class="modal-footer">
+                <button id="create-profile" type="button" class="btn btn-default" data-dismiss="modal">Start chat!</button>
+              </div>
 
         </form>
 
@@ -121,25 +82,12 @@
   </div>
 
   <!--Chatroom and Side panel-->
-  <div class="container" id="selectLanguageBox">
+  <!-- <div class="container" id="selectLanguageBox"> -->
 
-      <div class="form-group">
-        <h3>Select Your Language:</h3>
-        <span>In order to start, you must select a language!</span>
-        <select class="form-control" id="languageList">
-        </select>
-        <!-- <button class="btn btn-primary" id="text2TranslateInChat">Select</button> -->
-        <!-- <p>(when select button is clicked, display "Translating...")</p> -->
-      </div>
-
-
-
-  </div>
-  </div>
   <div class="container" id="chatSTUFF">
     <div class="row">
       <script></script>
-      <div class="col-md-8" id="chatHeader">
+      <div class="col-md" id="chatHeader">
         <h2>Global Chat:</h2>
 
         <div class="row">
@@ -148,18 +96,6 @@
             global conversation!
           </div>
         </div>
-
-
-      </div>
-
-      <div class="col-md-4" id="userHeader">
-        <h2>Users:</h2>
-        <div class="row">
-          <div class="col" id="userExplainer">
-            Click on the users to view profile information
-          </div>
-        </div>
-
       </div>
     </div>
     <br>
@@ -181,23 +117,11 @@
             <div class="row" id="textSTUFF">
               <div class="btn-group dropup">
                 <div class="input-group">
-                  <input type="text" class="form-control" name="usermsg" type="text" id="usermsg" size="63">
-                  <span class="input-group-btn">
-                    <button class="btn btn-default dropdown-toggle" type="button" name="submitmsg" type="submit" id="submitmsg"
-                      aria-haspopup="true" aria-expanded="false">Send</button>
-                  </span>
-                  <div class="dropdown">
-                      <button class="btn btn-default dropdown-toggle" type="button" id="gifButtonsView" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Pick Your Gif!
-                      </button>
-                      <div class="dropdown-menu" id="gifsView" aria-labelledby="dropdownMenuButton">
-                          <a class="dropdown-item" id="image"></a>
-                      </div>
-                    </div>
-                  <div class="dropdown-menu">
-                    <!-- Dropdown menu links -->
-
-                  </div>
+                    <input type="text" class="form-control" name="usermsg" type="text" id="usermsg" size="63">
+                    <span class="input-group-append">
+                      <button class="btn btn-default" type="button" name="submitmsg" type="submit" id="submitmsg">TEXT</button>
+                      <button class="btn btn-default" type="button" id="gifButtonsView">GIF</button>
+                    </span>
                 </div><!-- /input-group -->
               </div>
             </div><!-- /.row -->
