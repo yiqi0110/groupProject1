@@ -3,12 +3,12 @@
 $("#chatSTUFF").hide();
 
 var config = {
-    apiKey: "AIzaSyASqrK4S3eQgWUGX50opVsjseOvM8W4a6w",
+    apiKey: "#",
     authDomain: "global-chat-d7bc1.firebaseapp.com",
     databaseURL: "https://global-chat-d7bc1.firebaseio.com",
     projectId: "global-chat-d7bc1",
     storageBucket: "",
-    messagingSenderId: "637256265061"
+    messagingSenderId: "#"
 };
 
 firebase.initializeApp(config);
