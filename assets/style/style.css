@@ -2,11 +2,15 @@ h2 {
     float: left;
 }
 
-footer {
+.card {
     text-align: center;
     color: slategray;
     position: fixed;
     bottom: 0;
+}
+
+footer a {
+    color: slategray:
 }
 
 .jumbotron {
