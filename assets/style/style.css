@@ -5,6 +5,7 @@ h2 {
 .card {
     text-align: center;
     color: slategray;
+    width: 100vh;
     position: fixed;
     bottom: 0;
 }
